@@ -79,6 +79,7 @@
     <Build Include="dbo\Stored Procedures\UserRole_new.sql" />
     <Build Include="dbo\Stored Procedures\UserRole_delete.sql" />
     <Build Include="dbo\Stored Procedures\User_getByLogin.sql" />
+    <Build Include="dbo\Stored Procedures\Permission_isGrantedToUser.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.sql" />
