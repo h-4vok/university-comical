@@ -40,7 +40,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthenticationService.cs" />
+    <Compile Include="PasswordHashGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Comical.Models\Comical.Models.csproj">
+      <Project>{58602D74-57D3-40B4-AA8B-D0164F309837}</Project>
+      <Name>Comical.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Comical.Repository\Comical.Repository.csproj">
+      <Project>{7B7C0219-C0D3-4ECB-9616-BD9A22143A22}</Project>
+      <Name>Comical.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

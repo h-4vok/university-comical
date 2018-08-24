@@ -61,14 +61,21 @@ LEFT  JOIN	[User] U
 
 WHERE		u.Id IS NULL
 
--- ROLES TO PERMISSIONS
+-- ROLES TO PERMISSIONS for admin
 DELETE		RP
 FROM		RolePermission RP
 INNER JOIN	Role R
 		ON	RP.RoleId = r.Id
 WHERE		R.Code = 'admin'
 
---INSERT		RolePermission (
---	RoleId,
---	PermissionId
---)
+INSERT		RolePermission (
+	RoleId,
+	PermissionId
+)
+SELECT
+	RoleId = r.Id,
+	PermimssionId = p.Id
+FROM		Role R, Permission P
+WHERE		R.Code = 'admin'
+
+-- ROLES TO PERMISSIONS for user

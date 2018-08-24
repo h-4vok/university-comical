@@ -68,6 +68,17 @@
     <Build Include="dbo\Tables\Permission.sql" />
     <Build Include="dbo\Tables\RolePermission.sql" />
     <Build Include="dbo\Tables\UserRole.sql" />
+    <Build Include="dbo\Stored Procedures\User_new.sql" />
+    <Build Include="dbo\Stored Procedures\User_update.sql" />
+    <Build Include="dbo\Stored Procedures\User_changeEnabled.sql" />
+    <Build Include="dbo\Stored Procedures\User_changeBlocked.sql" />
+    <Build Include="dbo\Stored Procedures\User_incrementRetry.sql" />
+    <Build Include="dbo\Stored Procedures\User_delete.sql" />
+    <Build Include="dbo\Stored Procedures\User_get.sql" />
+    <Build Include="dbo\Stored Procedures\User_getById.sql" />
+    <Build Include="dbo\Stored Procedures\UserRole_new.sql" />
+    <Build Include="dbo\Stored Procedures\UserRole_delete.sql" />
+    <Build Include="dbo\Stored Procedures\User_getByLogin.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.sql" />

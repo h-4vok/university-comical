@@ -3,6 +3,7 @@
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY(1, 1),
 	Login NVARCHAR(70),
 	Password NVARCHAR(70),
-	Enabled BIT,
-	Blocked BIT
+	Enabled BIT DEFAULT (0),
+	Blocked BIT DEFAULT (1),
+	Retries INT DEFAULT (0)
 )
