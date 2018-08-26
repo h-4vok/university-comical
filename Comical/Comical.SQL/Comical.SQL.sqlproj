@@ -80,6 +80,9 @@
     <Build Include="dbo\Stored Procedures\UserRole_delete.sql" />
     <Build Include="dbo\Stored Procedures\User_getByLogin.sql" />
     <Build Include="dbo\Stored Procedures\Permission_isGrantedToUser.sql" />
+    <Build Include="dbo\Tables\HistoryEvent.sql" />
+    <Build Include="dbo\Tables\HistoryException.sql" />
+    <Build Include="dbo\Stored Procedures\HistoryEvent_new.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.sql" />
