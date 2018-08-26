@@ -83,6 +83,7 @@
     <Build Include="dbo\Tables\HistoryEvent.sql" />
     <Build Include="dbo\Tables\HistoryException.sql" />
     <Build Include="dbo\Stored Procedures\HistoryEvent_new.sql" />
+    <Build Include="dbo\Stored Procedures\HistoryException_new.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.sql" />
