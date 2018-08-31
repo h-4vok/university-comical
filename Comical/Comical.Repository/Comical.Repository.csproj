@@ -45,8 +45,6 @@
     <Compile Include="HistoryEventRepository.cs" />
     <Compile Include="HistoryExceptionRepository.cs" />
     <Compile Include="PermissionRepository.cs" />
-    <Compile Include="ErrorLogRepository.cs" />
-    <Compile Include="InformationLogRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoleRepository.cs" />
     <Compile Include="UnitOfWork.cs" />
