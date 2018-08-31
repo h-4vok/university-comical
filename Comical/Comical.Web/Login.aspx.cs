@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Comical.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,7 +17,13 @@ namespace Comical.Web
 
         protected void LoginButton_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Default");
+            var login = this.loginInput.Value;
+            var password = this.passwordInput.Value;
+
+            var service = new AuthenticationService();
+            var userId = service.Authenticate(login, password);
+
+            Session.Add("UserId", userId);
         }
     }
 }

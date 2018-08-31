@@ -257,6 +257,16 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Comical.Models\Comical.Models.csproj">
+      <Project>{58602d74-57d3-40b4-aa8b-d0164f309837}</Project>
+      <Name>Comical.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Comical.Services\Comical.Services.csproj">
+      <Project>{0ed8f3ed-8ed5-4adc-b87e-fd866e268522}</Project>
+      <Name>Comical.Services</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

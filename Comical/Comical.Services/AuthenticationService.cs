@@ -9,7 +9,18 @@ namespace Comical.Services
 {
     public class AuthenticationService
     {
-        public string Authenticate(string login, string password)
+        public class AuthenticateResponse
+        {
+            public string ValidationError { get; set; }
+            public bool Authenticated { get; set; }
+            public int UserId { get; set; }
+
+            public static implicit operator AuthenticateResponse(string validationError) => new AuthenticateResponse { ValidationError = validationError };
+
+            public static implicit operator AuthenticateResponse(int userId) => new AuthenticateResponse { UserId = userId };
+        }
+
+        public AuthenticateResponse Authenticate(string login, string password)
         {
             var inputsAreValid = this.ValidateInput(login, password);
             if (!String.IsNullOrWhiteSpace(inputsAreValid)) return inputsAreValid;
@@ -20,7 +31,7 @@ namespace Comical.Services
 
             if (user.Blocked) return "El usuario está bloqueado.";
             if (!user.Enabled) return "El usuario no está habilitado.";
-            
+
             var passwordMatches = this.CheckPassword(password, user.Password);
             if (!passwordMatches)
             {
@@ -34,8 +45,8 @@ namespace Comical.Services
 
                 return "La contraseña es incorrecta.";
             }
-            
-            return String.Empty;
+
+            return user.Id;
         }
 
         protected string ValidateInput(string login, string password)
