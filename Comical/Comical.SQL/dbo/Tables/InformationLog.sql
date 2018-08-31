@@ -1,0 +1,9 @@
+﻿CREATE TABLE [dbo].[InformationLog]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY(1, 1),
+	Message NVARCHAR(700),
+	LoggedDate DATETIME NOT NULL DEFAULT (GETUTCDATE()),
+	LoggedBy INT NULL,
+
+	FOREIGN KEY (LoggedBy) REFERENCES [User]
+)

@@ -22,7 +22,8 @@ SELECT
 	Enabled = 1
 FROM	(
 			SELECT Code = 'admin', Description = 'Administrador' UNION
-			SELECT Code = 'user', Description = 'Usuario'
+			SELECT Code = 'user', Description = 'Usuario' UNION
+			SELECT Code = 'support', Description = 'Soporte'
 		) data
 
 LEFT  JOIN	Role R
@@ -37,7 +38,11 @@ VALUES
 	( 'User_Disable' ),
 	( 'User_Enable' ),
 	( 'User_Delete' ),
-	( 'User_Read' )
+	( 'User_Read' ),
+	( 'ShoppingCart_CanUse' ),
+	( 'Account_CanUse' ), 
+	( 'InfoLogging_CanRead' ),
+	( 'ErrorLogging_CanRead' )
 
 -- USERS
 INSERT [User] (
@@ -61,7 +66,7 @@ LEFT  JOIN	[User] U
 
 WHERE		u.Id IS NULL
 
--- ROLES TO PERMISSIONS for admin
+-- ROLES TO PERMISSIONS FOR admin ROLE
 DELETE		RP
 FROM		RolePermission RP
 INNER JOIN	Role R
@@ -78,4 +83,32 @@ SELECT
 FROM		Role R, Permission P
 WHERE		R.Code = 'admin'
 
--- ROLES TO PERMISSIONS for user
+-- ROLES TO PERMISSIONS FOR user ROLE
+INSERT		RolePermission (
+	RoleId,
+	PermissionId
+)
+SELECT
+	RoleId = r.Id,
+	PermimssionId = p.Id
+FROM		Role R, Permission P
+WHERE		R.Code = 'user'
+AND			P.Code IN (
+	'ShoppingCart_CanUse',
+	'Account_CanUse'
+)
+
+-- ROLES TO PERMISSIONS FOR support ROLE
+INSERT		RolePermission (
+	RoleId,
+	PermissionId
+)
+SELECT
+	RoleId = r.Id,
+	PermimssionId = p.Id
+FROM		Role R, Permission P
+WHERE		R.Code = 'support'
+AND			P.Code IN (
+	'InfoLogging_CanRead',
+	'ErrorLogging_CanRead'
+)
