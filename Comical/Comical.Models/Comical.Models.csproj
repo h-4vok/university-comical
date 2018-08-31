@@ -48,6 +48,8 @@
     <Compile Include="Extensions\DataReaderExtensions.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
+    <Compile Include="HistoryEvent.cs" />
+    <Compile Include="HistoryException.cs" />
     <Compile Include="Logging\ErrorLogRecord.cs" />
     <Compile Include="Logging\InfoLogRecord.cs" />
     <Compile Include="Logging\LogRecord.cs" />

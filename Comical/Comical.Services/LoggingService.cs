@@ -1,4 +1,5 @@
-﻿using Comical.Models.Logging;
+{
+﻿using Comical.Models;
 using Comical.Repository;
 using System;
 using System.Collections.Generic;
@@ -10,30 +11,56 @@ namespace Comical.Services
 {
     public class LoggingService
     {
-        #region Multi-Thread Safe Singleton
+
+        #region Thread-safe Singleton
 
         private LoggingService() { }
         static LoggingService() { }
 
-        public static LoggingService Instance { get; } = new LoggingService();
+        private static readonly LoggingService instance = new LoggingService();
+
+        public static LoggingService obj => instance;
 
         #endregion
 
-        private InformationLogRepository InfoLogRepository { get; } = new InformationLogRepository();
-        private ErrorLogRepository ErrorLogRepository { get; } = new ErrorLogRepository();
+        private Lazy<ISessionService> lazySessionService = new Lazy<ISessionService>(() => DependencyResolver.obj.Resolve<ISessionService>());
 
-        public void Log(string message, int? userId)
+        private ISessionService SessionService => lazySessionService.Value;
+
+        public void Log(string section, string message)
         {
-            var info = new InfoLogRecord(message);
-            this.InfoLogRepository.New(info, userId);
+            var repository = new HistoryEventRepository();
+            var userId = this.SessionService.CurrentUserId;
+
+            var item = new HistoryEvent
+            {
+                Section = section,
+                Message = message,
+                UserId = userId
+            };
+
+            repository.New(item);
         }
 
-        public void Log(Exception ex, int? userId)
+        public void Log(string section, Exception ex)
         {
-            var error = new ErrorLogRecord(ex);
-            this.ErrorLogRepository.New(error, userId);
+            var repository = new HistoryExceptionRepository();
+            var userId = this.SessionService.CurrentUserId;
 
-            if (ex.InnerException != null) this.Log(ex.InnerException, userId);
+            var item = new HistoryException
+            {
+                Section = section,
+                ExceptionType = ex.GetType().FullName,
+                ExceptionSource = ex.Source,
+                ExceptionMessage = ex.Message,
+                ExceptionStackTrace = ex.StackTrace,
+                UserId = userId
+            };
+
+            repository.New(item);
+
+            if (ex.InnerException != null) this.Log(section, ex.InnerException);
         }
+
     }
 }
