@@ -93,5 +93,28 @@ namespace Comical.Repository
                 .And("where", where)
             );
         }
+
+        public void SetVerticalVerifier()
+        {
+            var verifiers = this.UnitOfWork.GetDirect(
+                "Security_getHorizontalVerifiers",
+                this.FetchHorizontalVerifier,
+                ParametersBuilder.With("table", this.TableName)
+            );
+
+            var verticalChecksum = Crypto3DES.obj.GetChecksum(verifiers);
+
+            this.UnitOfWork.ExecuteDirect(
+                "VerticalVerifier_update",
+                ParametersBuilder.With("TableName", this.TableName)
+                .And("VerticalVerifier", verticalChecksum)
+            );
+        }
+
+        protected string FetchHorizontalVerifier(IDataReader reader)
+        {
+            var output = reader.GetString("__HorizontalVerifier__");
+            return output;
+        }
     }
 }
