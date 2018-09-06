@@ -10,9 +10,9 @@ namespace Comical.Repository
 {
     public abstract class BaseRepository
     {
-        public BaseRepository(string tableName = null)
+        public BaseRepository(string tableName = null, UnitOfWork unitOfWork = null)
         {
-            this.UnitOfWork = new UnitOfWork();
+            this.UnitOfWork = unitOfWork ?? new UnitOfWork();
             this.TableName = tableName ?? this.CalculatedTableName;
         }
 

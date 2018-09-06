@@ -46,6 +46,7 @@
     <Compile Include="Common\Crypt3DES.cs" />
     <Compile Include="Common\ParametersBuilder.cs" />
     <Compile Include="Common\ProcedureParameter.cs" />
+    <Compile Include="DatabaseStatus.cs" />
     <Compile Include="Extensions\DataReaderExtensions.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />

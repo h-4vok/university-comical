@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseRepository.cs" />
+    <Compile Include="DatabaseStatusRepository.cs" />
     <Compile Include="HistoryEventRepository.cs" />
     <Compile Include="HistoryExceptionRepository.cs" />
     <Compile Include="PermissionRepository.cs" />

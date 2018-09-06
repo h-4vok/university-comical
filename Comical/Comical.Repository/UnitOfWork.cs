@@ -12,6 +12,13 @@ namespace Comical.Repository
 {
     public class UnitOfWork
     {
+        public UnitOfWork(string connectionString = null)
+        {
+            this.ConnectionString = connectionString ?? ComicalConfiguration.ComicalConnectionString;
+        }
+
+        private string ConnectionString { get; set; }
+
         private bool isConnected = false;
         private bool isTransactionRunning = false;
 
@@ -40,7 +47,7 @@ namespace Comical.Repository
 
         protected void BeginTransactionAndRun(Action action)
         {
-            using (this.connection = new SqlConnection(ComicalConfiguration.ConnectionString))
+            using (this.connection = new SqlConnection(this.ConnectionString))
             {
                 this.connection.Open();
                 this.isConnected = true;

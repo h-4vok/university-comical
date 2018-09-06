@@ -9,6 +9,7 @@ namespace Comical.Models.Common
 {
     public static class ComicalConfiguration
     {
-        public static string ConnectionString => ConfigurationManager.ConnectionStrings["ComicalDB"].ConnectionString;
+        public static string ComicalConnectionString => ConfigurationManager.ConnectionStrings["ComicalDB"].ConnectionString;
+        public static string MasterConnectionString => ConfigurationManager.ConnectionStrings["MasterDB"].ConnectionString;
     }
 }
