@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="BaseModel.cs" />
     <Compile Include="Common\ComicalConfiguration.cs" />
+    <Compile Include="Common\Crypt3DES.cs" />
     <Compile Include="Common\ParametersBuilder.cs" />
     <Compile Include="Common\ProcedureParameter.cs" />
     <Compile Include="Extensions\DataReaderExtensions.cs" />

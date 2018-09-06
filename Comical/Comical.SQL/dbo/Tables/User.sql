@@ -5,5 +5,6 @@
 	Password NVARCHAR(70),
 	Enabled BIT DEFAULT (0),
 	Blocked BIT DEFAULT (1),
-	Retries INT DEFAULT (0)
+	Retries INT DEFAULT (0),
+	__HorizontalVerifier__ NVARCHAR(500)
 )

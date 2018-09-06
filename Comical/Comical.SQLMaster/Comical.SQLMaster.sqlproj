@@ -4,16 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <Name>Comical.SQL</Name>
+    <Name>Comical.SQLMaster</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{851e128c-3588-4147-88ac-7097335be20d}</ProjectGuid>
+    <ProjectGuid>{4139b67e-9c78-491f-9b3c-2bb3e2c80cf2}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
-    <RootNamespace>Comical.SQL</RootNamespace>
-    <AssemblyName>Comical.SQL</AssemblyName>
+    <RootNamespace>Comical.SQLMaster</RootNamespace>
+    <AssemblyName>Comical.SQLMaster</AssemblyName>
     <ModelCollation>1033, CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
@@ -59,40 +59,12 @@
     <Folder Include="Properties" />
     <Folder Include="dbo" />
     <Folder Include="dbo\Tables" />
-    <Folder Include="dbo\Stored Procedures" />
     <Folder Include="Scripts" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\User.sql" />
-    <Build Include="dbo\Tables\Role.sql" />
-    <Build Include="dbo\Tables\Permission.sql" />
-    <Build Include="dbo\Tables\RolePermission.sql" />
-    <Build Include="dbo\Tables\UserRole.sql" />
-    <Build Include="dbo\Stored Procedures\User_new.sql" />
-    <Build Include="dbo\Stored Procedures\User_update.sql" />
-    <Build Include="dbo\Stored Procedures\User_changeEnabled.sql" />
-    <Build Include="dbo\Stored Procedures\User_changeBlocked.sql" />
-    <Build Include="dbo\Stored Procedures\User_incrementRetry.sql" />
-    <Build Include="dbo\Stored Procedures\User_delete.sql" />
-    <Build Include="dbo\Stored Procedures\User_get.sql" />
-    <Build Include="dbo\Stored Procedures\User_getById.sql" />
-    <Build Include="dbo\Stored Procedures\UserRole_new.sql" />
-    <Build Include="dbo\Stored Procedures\UserRole_delete.sql" />
-    <Build Include="dbo\Stored Procedures\User_getByLogin.sql" />
-    <Build Include="dbo\Stored Procedures\Permission_isGrantedToUser.sql" />
-    <Build Include="dbo\Tables\HistoryEvent.sql" />
-    <Build Include="dbo\Tables\HistoryException.sql" />
-    <Build Include="dbo\Stored Procedures\HistoryEvent_new.sql" />
-    <Build Include="dbo\Stored Procedures\HistoryException_new.sql" />
-    <Build Include="dbo\Tables\VerticalVerifier.sql" />
-    <Build Include="dbo\Stored Procedures\VerticalVerifier_update.sql" />
-    <Build Include="dbo\Stored Procedures\Security_getRecord.sql" />
-    <Build Include="dbo\Stored Procedures\Security_setVerifier.sql" />
+    <Build Include="dbo\Tables\DatabaseStatus.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Comical.SQL.publish.xml" />
   </ItemGroup>
 </Project>

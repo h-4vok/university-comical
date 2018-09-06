@@ -7,5 +7,6 @@
 	ExceptionMessage NVARCHAR(700) NOT NULL,
 	ExceptionStackTrace NVARCHAR(MAX),
 	UserId INT,
-	DateLogged DATETIME DEFAULT GETUTCDATE()
+	DateLogged DATETIME DEFAULT GETUTCDATE(),
+	__HorizontalVerifier__ NVARCHAR(500),
 )

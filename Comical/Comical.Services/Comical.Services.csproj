@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="AuthenticationService.cs" />
     <Compile Include="AuthorizationService.cs" />
+    <Compile Include="ChecksumService.cs" />
     <Compile Include="DependencyResolver.cs" />
     <Compile Include="ISessionService.cs" />
     <Compile Include="LoggingService.cs" />

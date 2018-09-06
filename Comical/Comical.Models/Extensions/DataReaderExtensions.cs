@@ -85,5 +85,15 @@ namespace System.Data
         {
             return GetNullableValueWith<DateTime>(subject, columnName);
         }
+
+        public static object GetValue(this IDataReader subject, string columnName)
+        {
+            var value = subject.GetValue(subject.GetOrdinal(columnName));
+
+            if (DBNull.Value.Equals(value))
+                return null;
+
+            return value;
+        }
     }
 }

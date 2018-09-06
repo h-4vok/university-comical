@@ -1,4 +1,4 @@
-{
+
 ﻿using Comical.Models;
 using Comical.Repository;
 using System;
