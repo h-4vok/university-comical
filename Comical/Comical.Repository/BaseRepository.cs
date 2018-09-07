@@ -1,5 +1,6 @@
 ﻿using Comical.Models.Common;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -10,6 +11,14 @@ namespace Comical.Repository
 {
     public abstract class BaseRepository
     {
+        protected class RecordModel
+        {
+            public IEnumerable<string> Values { get; set; }
+            public string Verifier { get; set; }
+            public int Id { get; set; }
+            public object Timestamp { get; set; }
+        }
+
         public BaseRepository(string tableName = null, UnitOfWork unitOfWork = null)
         {
             this.UnitOfWork = unitOfWork ?? new UnitOfWork();
@@ -43,7 +52,13 @@ namespace Comical.Repository
         protected string CalculateHorizontalVerifier(string where)
         {
             var values = this.GetRecordValues(where);
+            var output = this.CalculateHorizontalVerifier(values);
 
+            return output;
+        }
+
+        protected string CalculateHorizontalVerifier(IEnumerable<string> values)
+        {
             var output = Crypto3DES.obj.GetChecksum(values);
 
             return output;
@@ -115,6 +130,54 @@ namespace Comical.Repository
         {
             var output = reader.GetString("__HorizontalVerifier__");
             return output;
+        }
+
+        protected RecordModel FetchRecordModel(IDataReader reader)
+        {
+            var output = new RecordModel();
+            var values = new List<string>();
+            var schemaTable = reader.GetSchemaTable();
+            var columns = schemaTable
+                .Select()
+                .Select(r => r.ItemArray[0].AsString())
+                .ToList();
+
+            output.Timestamp = new object(); // TODO: complete this
+            output.Verifier = reader.GetString("__HorizontalVerifier__");
+            output.Id = reader.GetInt32("Id");
+
+            columns.RemoveAll(columnsToAvoid.Contains);
+
+            values.AddRange(columns.Select(c => reader.GetValue(c).AsString()));
+            output.Values = values;
+
+            return output;
+        }
+
+        public IEnumerable<string> FindChecksumErrors()
+        {
+            var output = new ConcurrentBag<string>();
+            
+            var models = this.UnitOfWork.GetDirect(
+                "Security_getAllRecords",
+                this.FetchRecordModel,
+                ParametersBuilder.With("table", this.TableName)
+            );
+
+            const string errorFormat = "Dígito Verificador Horizontal Inválido. Tabla '{0}'. Id '{1}'.";
+
+            Parallel.ForEach(models, model =>
+            {
+                var verifier = this.CalculateHorizontalVerifier(model.Values);
+
+                if (verifier != model.Verifier)
+                {
+                    var message = String.Format(errorFormat, this.TableName, model.Id);
+                    output.Add(message);
+                }
+            });
+
+            return output.ToList();
         }
     }
 }

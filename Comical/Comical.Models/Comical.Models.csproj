@@ -47,6 +47,7 @@
     <Compile Include="Common\ParametersBuilder.cs" />
     <Compile Include="Common\ProcedureParameter.cs" />
     <Compile Include="DatabaseStatus.cs" />
+    <Compile Include="Enums\PermissionCodes.cs" />
     <Compile Include="Extensions\DataReaderExtensions.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />

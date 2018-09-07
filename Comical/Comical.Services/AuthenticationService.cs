@@ -1,4 +1,6 @@
-﻿using Comical.Repository;
+﻿using Comical.Models;
+using Comical.Models.Enums;
+using Comical.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +16,7 @@ namespace Comical.Services
             public string ValidationError { get; set; }
             public bool Authenticated { get; set; }
             public int UserId { get; set; }
+            public IEnumerable<string> ChecksumErrors { get; set; }
 
             public static implicit operator AuthenticateResponse(string validationError) => new AuthenticateResponse { ValidationError = validationError };
 
@@ -46,6 +49,42 @@ namespace Comical.Services
                 return "La contraseña es incorrecta.";
             }
 
+            var permissionRepository = new PermissionRepository();
+            IEnumerable<string> checksumErrors = new List<string>();
+            var mustCheckVerifiers = permissionRepository.IsGrantedTo(user.Id, PermissionCodes.VerifierDigits_CheckOnLogin);
+            if (mustCheckVerifiers)
+            {
+                checksumErrors = this.CheckVerifiers();
+                if (checksumErrors.Any())
+                {
+                    this.SetDatabaseToChecksumError();
+                }
+            }
+
+            var databaseStatus = this.GetDatabaseStatus();
+
+            if  (databaseStatus.UnderMaintenance)
+            {
+                var cannotContinue = permissionRepository.IsGrantedTo(user.Id, PermissionCodes.UnderMaintenance_CanLogin);
+                if (!cannotContinue) return "El sistema se encuentra en mantenimiento.";
+            }
+
+            if (databaseStatus.HasChecksumError)
+            {
+                var cannotContinue = permissionRepository.IsGrantedTo(user.Id, PermissionCodes.HasChecksumError_CanLogin);
+                if (!cannotContinue) return "El sistema se encuentra en mantenimiento.";
+
+                if (checksumErrors.Any())
+                {
+                    return new AuthenticateResponse
+                    {
+                        Authenticated = true,
+                        ChecksumErrors = checksumErrors,
+                        UserId = user.Id
+                    };
+                }
+            }
+            
             return user.Id;
         }
 
@@ -62,6 +101,42 @@ namespace Comical.Services
             var actualHashed = PasswordHashGenerator.HashPassword(actual);
 
             return String.Equals(actualHashed, expectedHashed);
+        }
+
+        protected IEnumerable<string> CheckVerifiers()
+        {
+            var repositoriesList = new List<BaseRepository>
+            {
+                new HistoryEventRepository(),
+                new HistoryExceptionRepository(),
+                new PermissionRepository(),
+                new RoleRepository(),
+                new UserRepository(),
+            };
+
+            var errors = new List<string>();
+
+            Parallel.ForEach(repositoriesList, r =>
+            {
+                var messages = r.FindChecksumErrors();
+                errors.AddRange(messages);
+            });
+
+            return errors;  
+        }
+
+        protected DatabaseStatus GetDatabaseStatus()
+        {
+            var repository = new DatabaseStatusRepository();
+            var output = repository.Get();
+
+            return output;
+        }
+
+        protected void SetDatabaseToChecksumError()
+        {
+            var repository = new DatabaseStatusRepository();
+            repository.SetHasChecksumError(true);
         }
     }
 }

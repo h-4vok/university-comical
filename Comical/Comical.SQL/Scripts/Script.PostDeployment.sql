@@ -32,17 +32,27 @@ WHERE		r.Id IS NULL
 
 -- PERMISSIONS
 INSERT Permission ( Code )
-VALUES
-	( 'User_New' ),
-	( 'User_Update' ),
-	( 'User_Disable' ),
-	( 'User_Enable' ),
-	( 'User_Delete' ),
-	( 'User_Read' ),
-	( 'ShoppingCart_CanUse' ),
-	( 'Account_CanUse' ), 
-	( 'InfoLogging_CanRead' ),
-	( 'ErrorLogging_CanRead' )
+SELECT
+	Code = data.Code
+FROM (
+
+	SELECT Code = 'User_New' UNION
+	SELECT Code =  'User_Update' UNION
+	SELECT Code =  'User_Disable' UNION
+	SELECT Code =  'User_Enable' UNION
+	SELECT Code =  'User_Delete' UNION
+	SELECT Code =  'User_Read' UNION
+	SELECT Code =  'ShoppingCart_CanUse' UNION
+	SELECT Code =  'Account_CanUse' UNION
+	SELECT Code =  'InfoLogging_CanRead' UNION
+	SELECT Code =  'ErrorLogging_CanRead' UNION
+	SELECT Code =  'VerifierDigits_CheckOnLogin' UNION
+	SELECT Code =  'UnderMaintenance_CanLogin' UNION
+	SELECT Code =  'HasChecksumError_CanLogin'
+
+	) DATA
+LEFT  JOIN	Permission P
+		ON	data.Code = p.Code
 
 -- USERS
 INSERT [User] (
