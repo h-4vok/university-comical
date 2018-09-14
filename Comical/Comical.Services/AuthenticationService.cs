@@ -54,10 +54,10 @@ namespace Comical.Services
             var mustCheckVerifiers = permissionRepository.IsGrantedTo(user.Id, PermissionCodes.VerifierDigits_CheckOnLogin);
             if (mustCheckVerifiers)
             {
-                checksumErrors = this.CheckVerifiers();
+                checksumErrors = ChecksumService.obj.CheckVerifiers();
                 if (checksumErrors.Any())
                 {
-                    this.SetDatabaseToChecksumError();
+                    ChecksumService.obj.SetDatabaseToChecksumError();
                 }
             }
 
@@ -103,40 +103,12 @@ namespace Comical.Services
             return String.Equals(actualHashed, expectedHashed);
         }
 
-        protected IEnumerable<string> CheckVerifiers()
-        {
-            var repositoriesList = new List<BaseRepository>
-            {
-                new HistoryEventRepository(),
-                new HistoryExceptionRepository(),
-                new PermissionRepository(),
-                new RoleRepository(),
-                new UserRepository(),
-            };
-
-            var errors = new List<string>();
-
-            Parallel.ForEach(repositoriesList, r =>
-            {
-                var messages = r.FindChecksumErrors();
-                errors.AddRange(messages);
-            });
-
-            return errors;  
-        }
-
         protected DatabaseStatus GetDatabaseStatus()
         {
             var repository = new DatabaseStatusRepository();
             var output = repository.Get();
 
             return output;
-        }
-
-        protected void SetDatabaseToChecksumError()
-        {
-            var repository = new DatabaseStatusRepository();
-            repository.SetHasChecksumError(true);
         }
     }
 }

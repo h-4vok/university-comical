@@ -49,9 +49,10 @@ namespace Comical.Repository
             return checksum;
         }
 
-        protected string CalculateHorizontalVerifier(string where)
+        protected string CalculateHorizontalVerifier(string where, string table = null)
         {
-            var values = this.GetRecordValues(where);
+            table = table ?? this.TableName;
+            var values = this.GetRecordValues(where, table);
             var output = this.CalculateHorizontalVerifier(values);
 
             return output;
@@ -64,19 +65,25 @@ namespace Comical.Repository
             return output;
         }
 
-        protected void SetHorizontalVerifier(int id)
+        protected void SetHorizontalVerifier(int id, string table)
         {
             var where = this.CreateWhere(id);
-            var checksum = this.CalculateHorizontalVerifier(where);
-            this.SetHorizontalVerifier(checksum, where);
+            var checksum = this.CalculateHorizontalVerifier(where, table);
+            this.SetHorizontalVerifier(checksum, where, table);
         }
 
-        protected IEnumerable<string> GetRecordValues(string where)
+        protected void SetHorizontalVerifier(int id)
         {
+            this.SetHorizontalVerifier(id, this.TableName);
+        }
+
+        protected IEnumerable<string> GetRecordValues(string where, string table = null)
+        {
+            table = table ?? this.TableName;
             var values = this.UnitOfWork.GetDirect(
                 "Security_getRecord",
                 this.FetchRecordValues,
-                ParametersBuilder.With("table", this.TableName)
+                ParametersBuilder.With("table", table)
                 .And("where", where)
             ).First();
 
@@ -99,29 +106,32 @@ namespace Comical.Repository
             return values;
         }
 
-        protected void SetHorizontalVerifier(string verifier, string where)
+        protected void SetHorizontalVerifier(string verifier, string where, string table)
         {
-            this.UnitOfWork.ExecuteDirect(
+            table = table ?? this.TableName;
+            this.UnitOfWork.Execute(
                 "Security_setVerifier",
-                ParametersBuilder.With("table", this.TableName)
+                ParametersBuilder.With("table", table)
                 .And("verifier", verifier)
                 .And("where", where)
             );
         }
 
-        public void SetVerticalVerifier()
+        public void SetVerticalVerifier(string table = null)
         {
-            var verifiers = this.UnitOfWork.GetDirect(
+            table = table ?? this.TableName;
+
+            var verifiers = this.UnitOfWork.Get(
                 "Security_getHorizontalVerifiers",
                 this.FetchHorizontalVerifier,
-                ParametersBuilder.With("table", this.TableName)
+                ParametersBuilder.With("table", table)
             );
 
             var verticalChecksum = Crypto3DES.obj.GetChecksum(verifiers);
 
-            this.UnitOfWork.ExecuteDirect(
+            this.UnitOfWork.Execute(
                 "VerticalVerifier_update",
-                ParametersBuilder.With("TableName", this.TableName)
+                ParametersBuilder.With("TableName", table)
                 .And("VerticalVerifier", verticalChecksum)
             );
         }

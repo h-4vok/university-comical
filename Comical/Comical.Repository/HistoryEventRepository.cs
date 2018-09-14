@@ -13,13 +13,21 @@ namespace Comical.Repository
     {
         public int New(HistoryEvent model)
         {
-            var output = this.UnitOfWork.ScalarDirect(
-                "HistoryEvent_new",
-                ParametersBuilder.With("Section", model.Section)
-                .And("Message", model.Message)
-                .And("UserId", model.UserId)
-                .And("DateLogged", model.DateLogged)
-            ).AsInt();
+            var output = this.UnitOfWork.Run(() =>
+            {
+                var id = this.UnitOfWork.ScalarDirect(
+                    "HistoryEvent_new",
+                    ParametersBuilder.With("Section", model.Section)
+                    .And("Message", model.Message)
+                    .And("UserId", model.UserId)
+                    .And("DateLogged", model.DateLogged)
+                ).AsInt();
+
+                this.SetHorizontalVerifier(id);
+                this.SetVerticalVerifier();
+
+                return id;
+            });
 
             return output;
         }

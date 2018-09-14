@@ -13,15 +13,23 @@ namespace Comical.Repository
     {
         public int New(HistoryException model)
         {
-            var output = this.UnitOfWork.ScalarDirect(
-                "HistoryException_new",
-                ParametersBuilder.With("Section", model.Section)
-                .And("ExceptionType", model.ExceptionType)
-                .And("ExceptionSource", model.ExceptionSource)
-                .And("ExceptionMessage", model.ExceptionMessage)
-                .And("ExceptionStackTrace", model.ExceptionStackTrace)
-                .And("UserId", model.UserId)
-            ).AsInt();
+            var output = this.UnitOfWork.Run(() =>
+            {
+                var id = this.UnitOfWork.ScalarDirect(
+                    "HistoryException_new",
+                    ParametersBuilder.With("Section", model.Section)
+                    .And("ExceptionType", model.ExceptionType)
+                    .And("ExceptionSource", model.ExceptionSource)
+                    .And("ExceptionMessage", model.ExceptionMessage)
+                    .And("ExceptionStackTrace", model.ExceptionStackTrace)
+                    .And("UserId", model.UserId)
+                ).AsInt();
+
+                this.SetHorizontalVerifier(id);
+                this.SetVerticalVerifier();
+
+                return id;
+            });
 
             return output;
         }

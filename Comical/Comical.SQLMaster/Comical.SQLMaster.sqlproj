@@ -66,6 +66,12 @@
     <Build Include="dbo\Tables\DatabaseStatus.sql" />
     <Build Include="dbo\Stored Procedures\DatabaseStatus_setMaintenance.sql" />
     <Build Include="dbo\Stored Procedures\DatabaseStatus_setHasChecksumError.sql" />
+    <Build Include="dbo\Stored Procedures\Database_killAll.sql" />
+    <Build Include="dbo\Stored Procedures\Security_doRestore.sql" />
+    <Build Include="dbo\Stored Procedures\Security_doRestoreIncremental.sql" />
+    <Build Include="dbo\Stored Procedures\Security_doRestore_fullForDifferential.sql" />
+    <Build Include="dbo\Stored Procedures\Database_doBackup_Comical_full.sql" />
+    <Build Include="dbo\Stored Procedures\Database_doBackup_Comical_differential.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.sql" />

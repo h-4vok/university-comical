@@ -15,12 +15,16 @@ namespace Comical.Repository
         {
             foreach (var role in model.Roles)
             {
-                this.UnitOfWork.Execute(
+                var id = this.UnitOfWork.Scalar(
                     "UserRole_new",
                     ParametersBuilder.With("UserId", model.Id)
                     .And("RoleId", role.Id)
-                );
+                ).AsInt();
+
+                this.SetHorizontalVerifier(id, "UserRole");
             }
+
+            this.SetVerticalVerifier("UserRole");
         }
 
         public int New(User model)
@@ -32,6 +36,9 @@ namespace Comical.Repository
                     ParametersBuilder.With("Login", model.Login)
                     .And("Password", model.Password)
                 ).AsInt();
+
+                this.SetHorizontalVerifier(model.Id);
+                this.SetVerticalVerifier();
 
                 this.InsertUserRoles(model);
 
@@ -61,35 +68,58 @@ namespace Comical.Repository
                     .And("Enabled", model.Enabled)
                     .And("Blocked", model.Blocked)
                 );
+
+                this.SetHorizontalVerifier(model.Id);
+                this.SetVerticalVerifier();
             });
         }
 
         public int IncrementRetry(int id)
         {
-            var output = this.UnitOfWork.ScalarDirect(
-                "User_incrementRetry",
-                ParametersBuilder.With("id", id)
-            ).AsInt();
+            var output = this.UnitOfWork.Run(() =>
+            {
+                var retries = this.UnitOfWork.Scalar(
+                    "User_incrementRetry",
+                    ParametersBuilder.With("id", id)
+                ).AsInt();
+
+                this.SetHorizontalVerifier(id);
+                this.SetVerticalVerifier();
+
+                return retries;
+            });
 
             return output;
         }
 
         public void ChangeEnabled(int id, bool value)
         {
-            this.UnitOfWork.ExecuteDirect(
-                "User_changeEnabled",
-                ParametersBuilder.With("id", id)
-                .And("Enabled", value)
-            );
+            this.UnitOfWork.Run(() =>
+            {
+                this.UnitOfWork.Execute(
+                    "User_changeEnabled",
+                    ParametersBuilder.With("id", id)
+                    .And("Enabled", value)
+                );
+
+                this.SetHorizontalVerifier(id);
+                this.SetVerticalVerifier();
+            });
         }
 
         public void ChangeBlocked(int id, bool value)
         {
-            this.UnitOfWork.ExecuteDirect(
-                "User_changeBlocked",
-                ParametersBuilder.With("id", id)
-                .And("Blocked", value)
-            );
+            this.UnitOfWork.Run(() =>
+            {
+                this.UnitOfWork.Execute(
+                    "User_changeBlocked",
+                    ParametersBuilder.With("id", id)
+                    .And("Blocked", value)
+                );
+
+                this.SetHorizontalVerifier(id);
+                this.SetVerticalVerifier();
+            });
         }
 
         public User Get(int id)
