@@ -1,4 +1,5 @@
 ﻿using Comical.Models.Common;
+using DBNostalgia;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -19,10 +20,16 @@ namespace Comical.Repository
             public object Timestamp { get; set; }
         }
 
-        public BaseRepository(string tableName = null, UnitOfWork unitOfWork = null)
+        public BaseRepository(string tableName = null, string connectionString = null)
         {
-            this.UnitOfWork = unitOfWork ?? new UnitOfWork();
+            connectionString = connectionString ?? ComicalConfiguration.ComicalConnectionString;
+            this.UnitOfWork = new UnitOfWork(() => this.BuildConnection(connectionString));
             this.TableName = tableName ?? this.CalculatedTableName;
+        }
+
+        protected IDbConnection BuildConnection(string connectionString)
+        {
+            return null;
         }
 
         protected string CalculatedTableName => this.GetType().Name.Replace("Repository", String.Empty);
@@ -109,7 +116,7 @@ namespace Comical.Repository
         protected void SetHorizontalVerifier(string verifier, string where, string table)
         {
             table = table ?? this.TableName;
-            this.UnitOfWork.Execute(
+            this.UnitOfWork.NonQuery(
                 "Security_setVerifier",
                 ParametersBuilder.With("table", table)
                 .And("verifier", verifier)
@@ -129,7 +136,7 @@ namespace Comical.Repository
 
             var verticalChecksum = Crypto3DES.obj.GetChecksum(verifiers);
 
-            this.UnitOfWork.Execute(
+            this.UnitOfWork.NonQuery(
                 "VerticalVerifier_update",
                 ParametersBuilder.With("TableName", table)
                 .And("VerticalVerifier", verticalChecksum)

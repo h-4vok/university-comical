@@ -1,5 +1,6 @@
 ﻿using Comical.Models;
 using Comical.Models.Common;
+using DBNostalgia;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -53,14 +54,14 @@ namespace Comical.Repository
         {
             this.UnitOfWork.Run(() =>
             {
-                this.UnitOfWork.Execute(
+                this.UnitOfWork.NonQuery(
                     "UserRole_delete",
                     ParametersBuilder.With("userId", model.Id)
                 );
 
                 this.InsertUserRoles(model);
 
-                this.UnitOfWork.Execute(
+                this.UnitOfWork.NonQuery(
                     "User_update",
                     ParametersBuilder.With("id", model.Id)
                     .And("Login", model.Login)
@@ -96,7 +97,7 @@ namespace Comical.Repository
         {
             this.UnitOfWork.Run(() =>
             {
-                this.UnitOfWork.Execute(
+                this.UnitOfWork.NonQuery(
                     "User_changeEnabled",
                     ParametersBuilder.With("id", id)
                     .And("Enabled", value)
@@ -111,7 +112,7 @@ namespace Comical.Repository
         {
             this.UnitOfWork.Run(() =>
             {
-                this.UnitOfWork.Execute(
+                this.UnitOfWork.NonQuery(
                     "User_changeBlocked",
                     ParametersBuilder.With("id", id)
                     .And("Blocked", value)

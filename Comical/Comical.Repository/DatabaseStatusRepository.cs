@@ -1,5 +1,6 @@
 ﻿using Comical.Models;
 using Comical.Models.Common;
+using DBNostalgia;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,13 +12,13 @@ namespace Comical.Repository
 {
     public class DatabaseStatusRepository : BaseRepository
     {
-        public DatabaseStatusRepository() : base(null, new UnitOfWork(ComicalConfiguration.MasterConnectionString))
+        public DatabaseStatusRepository() : base(null, ComicalConfiguration.MasterConnectionString)
         {
         }
 
         public void SetUnderMaintenace(bool underMaintenance)
         {
-            this.UnitOfWork.ExecuteDirect(
+            this.UnitOfWork.NonQueryDirect(
                 "DatabaseStatus_setMaintenance",
                 ParametersBuilder.With("DatabaseName", "Comical")
                 .And("UnderMaintenance", underMaintenance)
@@ -26,7 +27,7 @@ namespace Comical.Repository
 
         public void SetHasChecksumError(bool hasChecksumError)
         {
-            this.UnitOfWork.ExecuteDirect(
+            this.UnitOfWork.NonQueryDirect(
                 "DatabaseStatus_setHasChecksumError",
                 ParametersBuilder.With("DatabaseName", "Comical")
                 .And("HasChecksumError", hasChecksumError)
