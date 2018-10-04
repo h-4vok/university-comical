@@ -22,6 +22,10 @@
         </div>
 
         <asp:Button class="btn btn-primary btn-lg btn-block center" runat="server" OnClick="LoginButton_Click" ID="LoginButton" Text="Autenticarse" />
+
+        <div class="center p-2">
+            <asp:Label CssClass="error-label" ID="lblError" Visible="false" runat="server"></asp:Label>
+        </div>
     </div>
 
 </asp:Content>

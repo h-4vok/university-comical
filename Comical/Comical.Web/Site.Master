@@ -15,6 +15,9 @@
     <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
+    <!-- Google Font Poppins -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet"> 
+
 </head>
 <body>
     <form runat="server">

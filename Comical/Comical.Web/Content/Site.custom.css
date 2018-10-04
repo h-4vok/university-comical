@@ -1,4 +1,8 @@
-﻿.center {
+﻿body {
+    font-family: 'Poppins', sans-serif !important;
+}
+
+.center {
     margin: 0 auto;
 }
 
@@ -17,4 +21,23 @@
 .mtb-20 {
     margin-top: 20px;
     margin-bottom: 20px;
+}
+
+.error-label {
+    color: red;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 2.5px;
+    margin-top: 2.5px;
+}
+
+.validation-errors {
+    padding: 20px;
+}
+
+.validation-errors > .row > span {
+    color: red;
+    font-weight: 700;
+    margin-bottom: 2.5px;
+    margin-top: 2.5px;
 }

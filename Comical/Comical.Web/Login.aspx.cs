@@ -21,9 +21,18 @@ namespace Comical.Web
             var password = this.passwordInput.Value;
 
             var service = new AuthenticationService();
-            var userId = service.Authenticate(login, password);
+            var authenticateResponse = service.Authenticate(login, password);
 
-            Session.Add("UserId", userId);
+            if (authenticateResponse.Authenticated)
+            {
+                this.lblError.Visible = false;
+                Session.Add("UserId", authenticateResponse.UserId);
+            }
+            else
+            {
+                this.lblError.Text = authenticateResponse.ValidationError;
+                this.lblError.Visible = true;
+            }
         }
     }
 }
