@@ -6,7 +6,7 @@ BEGIN
 
 	DECLARE @sql NVARCHAR(MAX)
 
-	SET @sql = CONCAT('SELECT * FROM [', @table, '] WHERE ', @where)
+	SET @sql = CONCAT('SELECT * FROM [', @table, '] WITH (NOLOCK) WHERE ', @where)
 
 	EXEC(@sql)
 

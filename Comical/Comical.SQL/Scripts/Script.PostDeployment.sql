@@ -65,10 +65,10 @@ SELECT
 	Login = data.Login,
 	Password = data.Password,
 	Enabled = 1,
-	Blocked = 1
+	Blocked = 0
 FROM		(
-				SELECT Login = 'admin', Password = 'admin' UNION
-				SELECT Login = 'test', Password = 'test'
+				SELECT Login = 'admin', Password = 'fIdUH9Pz71AW4S1BGQDIemBGqOg=' UNION
+				SELECT Login = 'test', Password = 'fIdUH9Pz71AW4S1BGQDIemBGqOg='
 			) data
 
 LEFT  JOIN	[User] U

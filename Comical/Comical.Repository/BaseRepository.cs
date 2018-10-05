@@ -89,7 +89,7 @@ namespace Comical.Repository
         protected IEnumerable<string> GetRecordValues(string where, string table = null)
         {
             table = table ?? this.TableName;
-            var values = this.UnitOfWork.GetDirect(
+            var values = this.UnitOfWork.Get(
                 "Security_getRecord",
                 this.FetchRecordValues,
                 ParametersBuilder.With("table", table)
@@ -110,7 +110,9 @@ namespace Comical.Repository
 
             columns.RemoveAll(columnsToAvoid.Contains);
 
-            var values = columns.Select(c => reader.GetValue(c).AsString());
+            var values = columns
+                .Select(c => reader.GetValue(c).AsString())
+                .ToList();
 
             return values;
         }

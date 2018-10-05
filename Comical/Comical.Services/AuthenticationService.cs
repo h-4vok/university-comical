@@ -98,7 +98,7 @@ namespace Comical.Services
 
         protected bool CheckPassword(string actual, string expectedHashed)
         {
-            var actualHashed = PasswordHashGenerator.HashPassword(actual);
+            var actualHashed = PasswordHasher.obj.Hash(actual);
 
             return String.Equals(actualHashed, expectedHashed);
         }
