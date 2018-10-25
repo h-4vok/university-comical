@@ -187,16 +187,18 @@ namespace Comical.Repository
 
             const string errorFormat = "Dígito Verificador Horizontal Inválido. Tabla '{0}'. Id '{1}'.";
 
-            Parallel.ForEach(models, model =>
-            {
-                var verifier = this.CalculateHorizontalVerifier(model.Values);
-
-                if (verifier != model.Verifier)
+            Parallel.ForEach(models, 
+                new ParallelOptions {  MaxDegreeOfParallelism = ComicalConfiguration.ChecksumCheckByModelDOP },
+                model =>
                 {
-                    var message = String.Format(errorFormat, this.TableName, model.Id);
-                    output.Add(message);
-                }
-            });
+                    var verifier = this.CalculateHorizontalVerifier(model.Values);
+
+                    if (verifier != model.Verifier)
+                    {
+                        var message = String.Format(errorFormat, this.TableName, model.Id);
+                        output.Add(message);
+                    }
+                });
 
             return output.ToList();
         }

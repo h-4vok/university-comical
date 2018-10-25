@@ -39,11 +39,13 @@ namespace Comical.Services
         {
             var errors = new List<string>();
 
-            Parallel.ForEach(this.repositories, r =>
-            {
-                var messages = r.FindChecksumErrors();
-                errors.AddRange(messages);
-            });
+            Parallel.ForEach(this.repositories,
+                new ParallelOptions { MaxDegreeOfParallelism = ComicalConfiguration.ChecksumCheckDOP },
+                r =>
+                {
+                    var messages = r.FindChecksumErrors();
+                    errors.AddRange(messages);
+                });
 
             return errors;
         }

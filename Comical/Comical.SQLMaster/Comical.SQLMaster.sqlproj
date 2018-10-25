@@ -72,6 +72,7 @@
     <Build Include="dbo\Stored Procedures\Security_doRestore_fullForDifferential.sql" />
     <Build Include="dbo\Stored Procedures\Database_doBackup_Comical_full.sql" />
     <Build Include="dbo\Stored Procedures\Database_doBackup_Comical_differential.sql" />
+    <Build Include="dbo\Stored Procedures\DatabaseStatus_get.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.sql" />

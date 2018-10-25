@@ -54,7 +54,7 @@ namespace Comical.Models.Common
                 cryptoStream.Write(data, 0, data.Length);
                 cryptoStream.FlushFinalBlock();
 
-                cryptoStream.Position = 0;
+                //cryptoStream.Position = 0;
 
                 var result = new byte[stream.Length - 1];
 

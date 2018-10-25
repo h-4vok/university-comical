@@ -20,7 +20,7 @@ namespace Comical.Services
 
             public static implicit operator AuthenticateResponse(string validationError) => new AuthenticateResponse { ValidationError = validationError };
 
-            public static implicit operator AuthenticateResponse(int userId) => new AuthenticateResponse { UserId = userId };
+            public static implicit operator AuthenticateResponse(int userId) => new AuthenticateResponse { UserId = userId, Authenticated = true };
         }
 
         public AuthenticateResponse Authenticate(string login, string password)

@@ -27,6 +27,7 @@ namespace Comical.Web
             {
                 this.lblError.Visible = false;
                 Session.Add("UserId", authenticateResponse.UserId);
+                Response.Redirect("Default.aspx");
             }
             else
             {

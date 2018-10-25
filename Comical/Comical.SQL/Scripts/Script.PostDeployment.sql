@@ -122,3 +122,26 @@ AND			P.Code IN (
 	'InfoLogging_CanRead',
 	'ErrorLogging_CanRead'
 )
+
+-- Setup roles for ADMIN user
+INSERT UserRole (
+	UserId,
+	RoleId
+)
+SELECT
+	UserId = data.UserId,
+	RoleId = data.RoleId
+FROM (
+	SELECT
+		UserId = u.Id,
+		RoleId = r.Id
+	FROM		[User] U, Role R
+	WHERE		u.Login = 'admin'
+	AND			r.Code = 'admin'
+) DATA
+
+LEFT  JOIN	UserRole UR
+		ON	data.UserId = ur.UserId
+		AND	data.RoleID = ur.RoleId
+
+WHERE		ur.UserId IS NULL
