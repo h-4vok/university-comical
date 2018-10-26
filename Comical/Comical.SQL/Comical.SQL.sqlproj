@@ -89,6 +89,7 @@
     <Build Include="dbo\Stored Procedures\Security_getRecord.sql" />
     <Build Include="dbo\Stored Procedures\Security_setVerifier.sql" />
     <Build Include="dbo\Stored Procedures\Security_getAllRecords.sql" />
+    <Build Include="dbo\Stored Procedures\Security_getHorizontalVerifiers.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.sql" />

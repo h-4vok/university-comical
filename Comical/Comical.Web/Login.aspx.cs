@@ -23,7 +23,13 @@ namespace Comical.Web
             var service = new AuthenticationService();
             var authenticateResponse = service.Authenticate(login, password);
 
-            if (authenticateResponse.Authenticated)
+            if (authenticateResponse.ChecksumErrors.Any())
+            {
+                const string checksumErrorsFormat = "Atención. Se encontraron {0} errores en dígitos verificadores.";
+                this.lblError.Text = String.Format(checksumErrorsFormat, authenticateResponse.ChecksumErrors.Count());
+                this.lblError.Visible = true;
+            }
+            else if (authenticateResponse.Authenticated)
             {
                 this.lblError.Visible = false;
                 Session.Add("UserId", authenticateResponse.UserId);

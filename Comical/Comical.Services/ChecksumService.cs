@@ -2,6 +2,7 @@
 using Comical.Models.Common;
 using Comical.Repository;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,25 +38,31 @@ namespace Comical.Services
 
         public IEnumerable<string> CheckVerifiers()
         {
-            var errors = new List<string>();
+            var errors = new ConcurrentBag<string>();
 
             Parallel.ForEach(this.repositories,
                 new ParallelOptions { MaxDegreeOfParallelism = ComicalConfiguration.ChecksumCheckDOP },
                 r =>
                 {
                     var messages = r.FindChecksumErrors();
-                    errors.AddRange(messages);
+                    messages.ForEach(errors.Add);
                 });
 
             return errors;
         }
 
+        public void ResetHorizontalVerifiers()
+        {
+            Parallel.ForEach(this.repositories,
+                new ParallelOptions {  MaxDegreeOfParallelism = ComicalConfiguration.ChecksumResetDOP },
+                r => r.ResetHorizontalVerifiers());
+        }
+
         public void ResetVerticalVerifiers()
         {
-            Parallel.ForEach(this.repositories, r =>
-            {
-                r.SetVerticalVerifier();
-            });
+            Parallel.ForEach(this.repositories,
+                new ParallelOptions { MaxDegreeOfParallelism = ComicalConfiguration.ChecksumResetDOP }, 
+                r => r.SetVerticalVerifier());
         }
     }
 }

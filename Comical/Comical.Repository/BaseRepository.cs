@@ -128,23 +128,37 @@ namespace Comical.Repository
             );
         }
 
+        protected void SetHorizontalVerifierDirectly(int id, string verifier)
+        {
+            var where = this.CreateWhere(id);
+            this.UnitOfWork.NonQueryDirect(
+                "Security_setVerifier",
+                ParametersBuilder.With("table", this.TableName)
+                .And("verifier", verifier)
+                .And("where", where)
+            );
+        }
+
         public void SetVerticalVerifier(string table = null)
         {
             table = table ?? this.TableName;
 
-            var verifiers = this.UnitOfWork.Get(
-                "Security_getHorizontalVerifiers",
-                this.FetchHorizontalVerifier,
-                ParametersBuilder.With("table", table)
-            );
+            this.UnitOfWork.Run(() =>
+            {
+                var verifiers = this.UnitOfWork.Get(
+                    "Security_getHorizontalVerifiers",
+                    this.FetchHorizontalVerifier,
+                    ParametersBuilder.With("TableName", table)
+                );
 
-            var verticalChecksum = Crypto3DES.obj.GetChecksum(verifiers);
+                var verticalChecksum = Crypto3DES.obj.GetChecksum(verifiers);
 
-            this.UnitOfWork.NonQuery(
-                "VerticalVerifier_update",
-                ParametersBuilder.With("TableName", table)
-                .And("VerticalVerifier", verticalChecksum)
-            );
+                this.UnitOfWork.NonQuery(
+                    "VerticalVerifier_update",
+                    ParametersBuilder.With("TableName", table)
+                    .And("VerticalVerifier", verticalChecksum)
+                );
+            });
         }
 
         protected string FetchHorizontalVerifier(IDataReader reader)
@@ -175,10 +189,28 @@ namespace Comical.Repository
             return output;
         }
 
+        public void ResetHorizontalVerifiers()
+        {
+            var models = this.UnitOfWork.GetDirect(
+                "Security_getAllRecords",
+                this.FetchRecordModel,
+                ParametersBuilder.With("table", this.TableName)
+            );
+
+            Parallel.ForEach(models,
+                new ParallelOptions { MaxDegreeOfParallelism = ComicalConfiguration.ChecksumResetDOP },
+                model =>
+                {
+                    var verifier = this.CalculateHorizontalVerifier(model.Values);
+                    this.SetHorizontalVerifierDirectly(model.Id, verifier);
+                }
+            );
+        }
+
         public IEnumerable<string> FindChecksumErrors()
         {
             var output = new ConcurrentBag<string>();
-            
+
             var models = this.UnitOfWork.GetDirect(
                 "Security_getAllRecords",
                 this.FetchRecordModel,
@@ -187,13 +219,14 @@ namespace Comical.Repository
 
             const string errorFormat = "Dígito Verificador Horizontal Inválido. Tabla '{0}'. Id '{1}'.";
 
-            Parallel.ForEach(models, 
-                new ParallelOptions {  MaxDegreeOfParallelism = ComicalConfiguration.ChecksumCheckByModelDOP },
+            Parallel.ForEach(models,
+                new ParallelOptions { MaxDegreeOfParallelism = ComicalConfiguration.ChecksumCheckByModelDOP },
                 model =>
                 {
-                    var verifier = this.CalculateHorizontalVerifier(model.Values);
+                    var lazyVerify = new Lazy<string>(() => this.CalculateHorizontalVerifier(model.Values));
+                    var verifierIsInvalid = String.IsNullOrWhiteSpace(model.Verifier) || lazyVerify.Value != model.Verifier;
 
-                    if (verifier != model.Verifier)
+                    if (verifierIsInvalid)
                     {
                         var message = String.Format(errorFormat, this.TableName, model.Id);
                         output.Add(message);
