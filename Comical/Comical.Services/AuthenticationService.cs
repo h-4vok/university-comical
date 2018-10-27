@@ -65,14 +65,14 @@ namespace Comical.Services
 
             if  (databaseStatus.UnderMaintenance)
             {
-                var cannotContinue = permissionRepository.IsGrantedTo(user.Id, PermissionCodes.UnderMaintenance_CanLogin);
-                if (!cannotContinue) return "El sistema se encuentra en mantenimiento.";
+                var canContinue = permissionRepository.IsGrantedTo(user.Id, PermissionCodes.UnderMaintenance_CanLogin);
+                if (!canContinue) return "El sistema se encuentra en mantenimiento.";
             }
 
             if (databaseStatus.HasChecksumError)
             {
-                var cannotContinue = permissionRepository.IsGrantedTo(user.Id, PermissionCodes.HasChecksumError_CanLogin);
-                if (!cannotContinue) return "El sistema se encuentra en mantenimiento.";
+                var canContinue = permissionRepository.IsGrantedTo(user.Id, PermissionCodes.HasChecksumError_CanLogin);
+                if (!canContinue) return "El sistema se encuentra en mantenimiento.";
 
                 if (checksumErrors.Any())
                 {

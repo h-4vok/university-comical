@@ -24,6 +24,7 @@ BEGIN
 			ON	r.Id = rp.RoleId
 
 	WHERE		rp.PermissionId = @permissionId
+	AND			ur.UserId = @userId
 
 	SELECT CONVERT(BIT, CASE WHEN @found IS NOT NULL THEN 1 ELSE 0 END)
 
