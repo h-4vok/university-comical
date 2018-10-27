@@ -21,5 +21,6 @@ namespace Comical.Models.Enums
         public static readonly string ErrorLogging_CanRead = "ErrorLogging_CanRead";
         public static readonly string UnderMaintenance_CanLogin = "UnderMaintenance_CanLogin";
         public static readonly string HasChecksumError_CanLogin = "HasChecksumError_CanLogin";
+        public static readonly string VerifierDigits_CanFix = "VerifierDigits_CanFix";
     }
 }

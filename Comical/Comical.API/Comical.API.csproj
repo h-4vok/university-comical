@@ -176,6 +176,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Comical.Models\Comical.Models.csproj">
+      <Project>{58602D74-57D3-40B4-AA8B-D0164F309837}</Project>
+      <Name>Comical.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Comical.Repository\Comical.Repository.csproj">
+      <Project>{7B7C0219-C0D3-4ECB-9616-BD9A22143A22}</Project>
+      <Name>Comical.Repository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Comical.Services\Comical.Services.csproj">
       <Project>{0ED8F3ED-8ED5-4ADC-B87E-FD866E268522}</Project>
       <Name>Comical.Services</Name>

@@ -16,7 +16,7 @@ namespace Comical.Services
             public string ValidationError { get; set; }
             public bool Authenticated { get; set; }
             public int UserId { get; set; }
-            public IEnumerable<string> ChecksumErrors { get; set; }
+            public IEnumerable<string> ChecksumErrors { get; set; } = new List<string>();
 
             public static implicit operator AuthenticateResponse(string validationError) => new AuthenticateResponse { ValidationError = validationError };
 

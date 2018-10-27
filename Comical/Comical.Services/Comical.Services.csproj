@@ -71,6 +71,7 @@
     <Compile Include="AuthenticationService.cs" />
     <Compile Include="AuthorizationService.cs" />
     <Compile Include="ChecksumService.cs" />
+    <Compile Include="DatabaseStatusService.cs" />
     <Compile Include="DependencyResolver.cs" />
     <Compile Include="ISessionService.cs" />
     <Compile Include="LoggingService.cs" />

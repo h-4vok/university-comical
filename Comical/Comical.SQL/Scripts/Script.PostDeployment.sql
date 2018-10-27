@@ -37,18 +37,19 @@ SELECT
 FROM (
 
 	SELECT Code = 'User_New' UNION
-	SELECT Code =  'User_Update' UNION
-	SELECT Code =  'User_Disable' UNION
-	SELECT Code =  'User_Enable' UNION
-	SELECT Code =  'User_Delete' UNION
-	SELECT Code =  'User_Read' UNION
-	SELECT Code =  'ShoppingCart_CanUse' UNION
-	SELECT Code =  'Account_CanUse' UNION
-	SELECT Code =  'InfoLogging_CanRead' UNION
-	SELECT Code =  'ErrorLogging_CanRead' UNION
-	SELECT Code =  'VerifierDigits_CheckOnLogin' UNION
-	SELECT Code =  'UnderMaintenance_CanLogin' UNION
-	SELECT Code =  'HasChecksumError_CanLogin'
+	SELECT Code = 'User_Update' UNION
+	SELECT Code = 'User_Disable' UNION
+	SELECT Code = 'User_Enable' UNION
+	SELECT Code = 'User_Delete' UNION
+	SELECT Code = 'User_Read' UNION
+	SELECT Code = 'ShoppingCart_CanUse' UNION
+	SELECT Code = 'Account_CanUse' UNION
+	SELECT Code = 'InfoLogging_CanRead' UNION
+	SELECT Code = 'ErrorLogging_CanRead' UNION
+	SELECT Code = 'VerifierDigits_CheckOnLogin' UNION
+	SELECT Code = 'UnderMaintenance_CanLogin' UNION
+	SELECT Code = 'HasChecksumError_CanLogin' UNION
+	SELECT Code = 'VerifierDigits_CanFix'
 
 	) DATA
 LEFT  JOIN	Permission P

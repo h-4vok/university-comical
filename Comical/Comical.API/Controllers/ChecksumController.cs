@@ -1,4 +1,6 @@
-﻿using Comical.Services;
+﻿using Comical.Models.Enums;
+using Comical.Repository;
+using Comical.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,13 +37,13 @@ namespace Comical.API.Controllers
         public ChecksumRecalculationResponse Post(ChecksumRecalculationRequest body)
         {
             if (body == null)
-                return "Parameter 'body' cannot be null.";
+                return "Parámetro 'body' no puede ser nulo.";
 
             if (String.IsNullOrWhiteSpace(body.UserName))
-                return "UserName cannot be empty.";
+                return "El usuario no puede ser vacío.";
 
             if (String.IsNullOrWhiteSpace(body.Password))
-                return "Password cannot be empty.";
+                return "La contraseña no puede ser vacía.";
 
             var authenticationService = new AuthenticationService();
             var authenticationResponse = authenticationService.Authenticate(body.UserName, body.Password);
@@ -49,15 +51,30 @@ namespace Comical.API.Controllers
             if (!authenticationResponse.Authenticated)
                 return authenticationResponse.ValidationError;
 
-            // TODO: Verificar que este usuario tiene permisos para resetear los verifiers
+            var permissionRepository = new PermissionRepository();
+            var isGranted = permissionRepository.IsGrantedTo(authenticationResponse.UserId, PermissionCodes.VerifierDigits_CanFix);
 
-            // TODO: Matar todas las conexiones 
-            // TODO: Colocar aplicacion en mantenimiento
+            if (!isGranted)
+                return "No tiene permisos para recalcular los dígitos verificadores.";
 
-            ChecksumService.obj.ResetHorizontalVerifiers();
-            ChecksumService.obj.ResetVerticalVerifiers();
+            try
+            {
+                DatabaseStatusService.obj.KillAllConnections();
 
-            // TODO: Sacar modo de mantenimiento
+                DatabaseStatusService.obj.SetUnderMaintenance();
+                DatabaseStatusService.obj.SetHasChecksumError();
+
+                ChecksumService.obj.ResetHorizontalVerifiers();
+                ChecksumService.obj.ResetVerticalVerifiers();
+
+                DatabaseStatusService.obj.UnsetUnderMaintenance();
+                DatabaseStatusService.obj.UnsetHasChecksumError();
+            }
+            catch(Exception ex)
+            {
+                LoggingService.obj.Log("ChecksumController", ex);
+                return "Ha ocurrido un error en la ejecución. Consulte la bitácora.";
+            }
 
             return new ChecksumRecalculationResponse();
         }

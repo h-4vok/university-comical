@@ -16,6 +16,14 @@ namespace Comical.Repository
         {
         }
 
+        public void KillAllConnections()
+        {
+            this.UnitOfWork.NonQueryDirect(
+                "Database_killAll",
+                ParametersBuilder.With("DBName", "Comical")
+            );
+        }
+
         public void SetUnderMaintenace(bool underMaintenance)
         {
             this.UnitOfWork.NonQueryDirect(

@@ -30,6 +30,12 @@ namespace Comical.Services
 
         #endregion
 
+        public void SetDatabaseToMaintenance()
+        {
+            var repository = new DatabaseStatusRepository();
+            repository.SetUnderMaintenace(true);
+        }
+
         public void SetDatabaseToChecksumError()
         {
             var repository = new DatabaseStatusRepository();
