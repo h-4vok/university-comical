@@ -57,26 +57,23 @@
                             <li class="nav-item">
                                 <a class="nav-link" runat="server" href="~/ShoppingCart">Carrito</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" runat="server" href="~/Account">Mi Cuenta</a>
-                            </li>
-                            <li class="nav-item">
+                            <li class="nav-item" runat="server" id="menuOptionLogin">
                                 <a class="nav-link" runat="server" href="~/Login">Autenticarse</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" runat="server" id="menuOptionSignUp">
                                 <a class="nav-link" runat="server" href="~/Sign Up">Registrarse</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" runat="server" id="menuOptionHistoryEvents">
                                 <a class="nav-link" runat="server" href="~/Logs">Bitácora</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" runat="server" id="menuOptionHistoryExceptions">
                                 <a class="nav-link" runat="server" href="~/Errors">Errores</a>
+                            </li>
+                            <li class="nav-item" runat="server" id="menuOptionVerifiers">
+                                <a class="nav-link" runat="server" href="~/Errors">Verificadores</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" runat="server" href="~/About">Sobre Nosotros</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" runat="server" href="~/Contact">Contacto</a>
                             </li>
                         </ul>
                     </div>

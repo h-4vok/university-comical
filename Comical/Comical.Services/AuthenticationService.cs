@@ -49,9 +49,9 @@ namespace Comical.Services
                 return "La contraseña es incorrecta.";
             }
 
-            var permissionRepository = new PermissionRepository();
             IEnumerable<string> checksumErrors = new List<string>();
-            var mustCheckVerifiers = permissionRepository.IsGrantedTo(user.Id, PermissionCodes.VerifierDigits_CheckOnLogin);
+
+            var mustCheckVerifiers = AuthorizationService.obj.IsEnabledFor(user.Id, PermissionCodes.VerifierDigits_CheckOnLogin);
             if (mustCheckVerifiers)
             {
                 checksumErrors = ChecksumService.obj.CheckVerifiers();
@@ -65,13 +65,13 @@ namespace Comical.Services
 
             if  (databaseStatus.UnderMaintenance)
             {
-                var canContinue = permissionRepository.IsGrantedTo(user.Id, PermissionCodes.UnderMaintenance_CanLogin);
+                var canContinue = AuthorizationService.obj.IsEnabledFor(user.Id, PermissionCodes.UnderMaintenance_CanLogin);
                 if (!canContinue) return "El sistema se encuentra en mantenimiento.";
             }
 
             if (databaseStatus.HasChecksumError)
             {
-                var canContinue = permissionRepository.IsGrantedTo(user.Id, PermissionCodes.HasChecksumError_CanLogin);
+                var canContinue = AuthorizationService.obj.IsEnabledFor(user.Id, PermissionCodes.HasChecksumError_CanLogin);
                 if (!canContinue) return "El sistema se encuentra en mantenimiento.";
 
                 if (checksumErrors.Any())

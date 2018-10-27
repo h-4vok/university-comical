@@ -25,9 +25,16 @@ namespace Comical.Web
 
             if (authenticateResponse.ChecksumErrors.Any())
             {
+                Session.Add("UserId", authenticateResponse.UserId);
                 const string checksumErrorsFormat = "Atención. Se encontraron {0} errores en dígitos verificadores.";
                 this.lblError.Text = String.Format(checksumErrorsFormat, authenticateResponse.ChecksumErrors.Count());
                 this.lblError.Visible = true;
+
+                if (this.Master is SiteMaster master)
+                {
+                    master.SetupSessionService();
+                    master.SetupMenuVisibility();
+                }
             }
             else if (authenticateResponse.Authenticated)
             {

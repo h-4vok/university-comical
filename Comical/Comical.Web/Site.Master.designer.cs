@@ -13,6 +13,51 @@ namespace Comical.Web {
     public partial class SiteMaster {
         
         /// <summary>
+        /// menuOptionLogin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuOptionLogin;
+        
+        /// <summary>
+        /// menuOptionSignUp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuOptionSignUp;
+        
+        /// <summary>
+        /// menuOptionHistoryEvents control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuOptionHistoryEvents;
+        
+        /// <summary>
+        /// menuOptionHistoryExceptions control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuOptionHistoryExceptions;
+        
+        /// <summary>
+        /// menuOptionVerifiers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuOptionVerifiers;
+        
+        /// <summary>
         /// MainContent control.
         /// </summary>
         /// <remarks>

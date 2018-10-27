@@ -1,5 +1,4 @@
 ﻿using Comical.Models.Enums;
-using Comical.Repository;
 using Comical.Services;
 using System;
 using System.Collections.Generic;
@@ -51,8 +50,7 @@ namespace Comical.API.Controllers
             if (!authenticationResponse.Authenticated)
                 return authenticationResponse.ValidationError;
 
-            var permissionRepository = new PermissionRepository();
-            var isGranted = permissionRepository.IsGrantedTo(authenticationResponse.UserId, PermissionCodes.VerifierDigits_CanFix);
+            var isGranted = AuthorizationService.obj.IsEnabledFor(authenticationResponse.UserId, PermissionCodes.VerifierDigits_CanFix);
 
             if (!isGranted)
                 return "No tiene permisos para recalcular los dígitos verificadores.";
