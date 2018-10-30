@@ -1,4 +1,5 @@
 ﻿using Comical.Models.Enums;
+using Comical.Models.Http;
 using Comical.Services;
 using System;
 using System.Collections.Generic;
@@ -11,28 +12,6 @@ namespace Comical.API.Controllers
 {
     public class ChecksumController : ApiController
     {
-        public class ChecksumRecalculationRequest
-        {
-            public string UserName { get; set; }
-            public string Password { get; set; }
-        }
-
-        public class ChecksumRecalculationResponse
-        {
-            public bool Success { get; set; } = true;
-            public string ErrorMessage { get; set; }
-            public bool Error { get { return !String.IsNullOrWhiteSpace(this.ErrorMessage); } }
-
-            public static implicit operator ChecksumRecalculationResponse(string errorMessage)
-            {
-                return new ChecksumRecalculationResponse
-                {
-                    Success = false,
-                    ErrorMessage = errorMessage
-                };
-            }
-        }
-
         public ChecksumRecalculationResponse Post(ChecksumRecalculationRequest body)
         {
             if (body == null)

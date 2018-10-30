@@ -70,7 +70,7 @@
                                 <a class="nav-link" runat="server" href="~/Errors">Errores</a>
                             </li>
                             <li class="nav-item" runat="server" id="menuOptionVerifiers">
-                                <a class="nav-link" runat="server" href="~/Errors">Verificadores</a>
+                                <a class="nav-link" runat="server" href="~/Verifiers">Verificadores</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" runat="server" href="~/About">Sobre Nosotros</a>
