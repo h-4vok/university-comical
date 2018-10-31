@@ -91,6 +91,7 @@
     <Build Include="dbo\Stored Procedures\Security_getAllRecords.sql" />
     <Build Include="dbo\Stored Procedures\Security_getHorizontalVerifiers.sql" />
     <Build Include="dbo\Stored Procedures\Permission_getByUser.sql" />
+    <Build Include="dbo\Stored Procedures\HistoryEvent_get.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.sql" />

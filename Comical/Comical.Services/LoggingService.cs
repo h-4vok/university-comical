@@ -43,6 +43,14 @@ namespace Comical.Services
             repository.New(item);
         }
 
+        public IEnumerable<HistoryEvent> GetEvents()
+        {
+            var repository = new HistoryEventRepository();
+            var items = repository.Get();
+
+            return items;
+        }
+
         public void Log(string section, Exception ex, int? userId = null)
         {
             var repository = new HistoryExceptionRepository();

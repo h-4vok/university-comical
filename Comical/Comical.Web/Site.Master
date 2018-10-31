@@ -64,7 +64,7 @@
                                 <a class="nav-link" runat="server" href="~/Sign Up">Registrarse</a>
                             </li>
                             <li class="nav-item" runat="server" id="menuOptionHistoryEvents">
-                                <a class="nav-link" runat="server" href="~/Logs">Bitácora</a>
+                                <a class="nav-link" runat="server" href="~/Events">Bitácora</a>
                             </li>
                             <li class="nav-item" runat="server" id="menuOptionHistoryExceptions">
                                 <a class="nav-link" runat="server" href="~/Errors">Errores</a>
