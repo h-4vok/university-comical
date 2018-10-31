@@ -90,6 +90,7 @@ namespace Comical.Services
 
                 if (checksumErrors.Any())
                 {
+                    logEvent("Autenticación exitosa.");
                     return new AuthenticateResponse
                     {
                         Authenticated = true,

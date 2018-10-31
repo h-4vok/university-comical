@@ -51,6 +51,14 @@ namespace Comical.Services
             return items;
         }
 
+        public IEnumerable<HistoryException> GetExceptions()
+        {
+            var repository = new HistoryExceptionRepository();
+            var items = repository.Get();
+
+            return items;
+        }
+
         public void Log(string section, Exception ex, int? userId = null)
         {
             var repository = new HistoryExceptionRepository();

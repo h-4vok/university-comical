@@ -11,7 +11,7 @@ using System.Web.UI.WebControls;
 
 namespace Comical.Web
 {
-    public partial class Events : System.Web.UI.Page
+    public partial class Errors : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -21,7 +21,7 @@ namespace Comical.Web
 
         private void LoadData()
         {
-            var items = LoggingService.obj.GetEvents();
+            var items = LoggingService.obj.GetExceptions();
 
             if (!items.Any())
             {
@@ -33,19 +33,21 @@ namespace Comical.Web
 
             var table = new DataTable();
             table.Columns.Add("ID", typeof(int));
-            table.Columns.Add("Sección");
+            table.Columns.Add("Tipo");
+            table.Columns.Add("Fuente");
             table.Columns.Add("Mensaje");
             table.Columns.Add("Usuario", typeof(int));
             table.Columns.Add("Fecha", typeof(DateTime));
             
-            void addNewRow(HistoryEvent model)
+            void addNewRow(HistoryException model)
             {
                 var row = table.NewRow();
                 row[0] = model.Id;
-                row[1] = model.Section;
-                row[2] = model.Message;
-                row[3] = model.UserId;
-                row[4] = model.DateLogged;
+                row[1] = model.ExceptionType;
+                row[2] = model.ExceptionSource;
+                row[3] = model.ExceptionMessage;
+                row[4] = model.UserId;
+                row[5] = model.DateLogged;
                 table.Rows.Add(row);
             }
 
