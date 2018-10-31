@@ -16,7 +16,7 @@ namespace Comical.Repository
         {
             var output = this.UnitOfWork.Run(() =>
             {
-                var id = this.UnitOfWork.ScalarDirect(
+                var id = this.UnitOfWork.Scalar(
                     "HistoryException_new",
                     ParametersBuilder.With("Section", model.Section)
                     .And("ExceptionType", model.ExceptionType)
@@ -27,7 +27,7 @@ namespace Comical.Repository
                 ).AsInt();
 
                 this.SetHorizontalVerifier(id);
-                this.SetVerticalVerifier();
+                this.SetVerticalVerifierClosure();
 
                 return id;
             });

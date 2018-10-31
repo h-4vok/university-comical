@@ -27,25 +27,26 @@ namespace Comical.Services
 
         private ISessionService SessionService => lazySessionService.Value;
 
-        public void Log(string section, string message)
+        public void Log(string section, string message, int? userId = null)
         {
             var repository = new HistoryEventRepository();
-            var userId = this.SessionService.CurrentUserId;
+            userId = userId ?? this.SessionService.CurrentUserId;
 
             var item = new HistoryEvent
             {
                 Section = section,
                 Message = message,
-                UserId = userId
+                UserId = userId,
+                DateLogged = DateTime.Now
             };
 
             repository.New(item);
         }
 
-        public void Log(string section, Exception ex)
+        public void Log(string section, Exception ex, int? userId = null)
         {
             var repository = new HistoryExceptionRepository();
-            var userId = this.SessionService.CurrentUserId;
+            userId = userId ?? this.SessionService.CurrentUserId;
 
             var item = new HistoryException
             {
@@ -54,7 +55,8 @@ namespace Comical.Services
                 ExceptionSource = ex.Source,
                 ExceptionMessage = ex.Message,
                 ExceptionStackTrace = ex.StackTrace,
-                UserId = userId
+                UserId = userId,
+                DateLogged = DateTime.Now
             };
 
             repository.New(item);

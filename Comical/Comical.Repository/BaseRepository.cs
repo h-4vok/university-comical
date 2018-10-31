@@ -139,25 +139,32 @@ namespace Comical.Repository
             );
         }
 
+        public void SetVerticalVerifierClosure(string table = null)
+        {
+            table = table ?? this.TableName;
+
+            var verifiers = this.UnitOfWork.Get(
+                    "Security_getHorizontalVerifiers",
+                    this.FetchHorizontalVerifier,
+                    ParametersBuilder.With("TableName", table)
+                );
+
+            var verticalChecksum = Crypto3DES.obj.GetChecksum(verifiers);
+
+            this.UnitOfWork.NonQuery(
+                "VerticalVerifier_update",
+                ParametersBuilder.With("TableName", table)
+                .And("VerticalVerifier", verticalChecksum)
+            );
+        }
+
         public void SetVerticalVerifier(string table = null)
         {
             table = table ?? this.TableName;
 
             this.UnitOfWork.Run(() =>
             {
-                var verifiers = this.UnitOfWork.Get(
-                    "Security_getHorizontalVerifiers",
-                    this.FetchHorizontalVerifier,
-                    ParametersBuilder.With("TableName", table)
-                );
-
-                var verticalChecksum = Crypto3DES.obj.GetChecksum(verifiers);
-
-                this.UnitOfWork.NonQuery(
-                    "VerticalVerifier_update",
-                    ParametersBuilder.With("TableName", table)
-                    .And("VerticalVerifier", verticalChecksum)
-                );
+                SetVerticalVerifierClosure(table);  
             });
         }
 

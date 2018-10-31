@@ -14,7 +14,8 @@ BEGIN
 		ExceptionSource,
 		ExceptionMessage,
 		ExceptionStackTrace,
-		UserId
+		UserId,
+		DateLogged
 	)
 	SELECT
 		Section = @Section,
@@ -22,7 +23,8 @@ BEGIN
 		ExceptionSource = @ExceptionSource,
 		ExceptionMessage = @ExceptionMessage,
 		ExceptionStackTrace = @ExceptionStackTrace,
-		UserId = @UserId
+		UserId = @UserId,
+		DateLogged = GETDATE()
 
 	DECLARE @id INT = SCOPE_IDENTITY()
 	SELECT @id

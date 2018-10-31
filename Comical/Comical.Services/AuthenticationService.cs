@@ -25,15 +25,29 @@ namespace Comical.Services
 
         public AuthenticateResponse Authenticate(string login, string password)
         {
+            var eventInfo = String.Format("Autenticación - {0}", login);
+            var eventFormat = "{0} - {1}";
+            int currentUserId = 0;
+            
+            void logEvent(string message) => LoggingService.obj.Log("Autenticación", String.Format(eventFormat, eventInfo, message), currentUserId);
+
+            string logEventAndReturn(string message) {
+                logEvent(message);
+                return message;
+            }
+
             var inputsAreValid = this.ValidateInput(login, password);
-            if (!String.IsNullOrWhiteSpace(inputsAreValid)) return inputsAreValid;
+            if (!String.IsNullOrWhiteSpace(inputsAreValid)) return logEventAndReturn(inputsAreValid);
 
             var repository = new UserRepository();
             var user = repository.GetByLogin(login);
-            if (user == null) return "El usuario no existe.";
+            if (user == null) return logEventAndReturn("El usuario no existe.");
 
-            if (user.Blocked) return "El usuario está bloqueado.";
-            if (!user.Enabled) return "El usuario no está habilitado.";
+            currentUserId = user.Id;
+
+            if (user.Blocked) return logEventAndReturn("El usuario está bloqueado.");
+
+            if (!user.Enabled) return logEventAndReturn("El usuario no está habilitado.");
 
             var passwordMatches = this.CheckPassword(password, user.Password);
             if (!passwordMatches)
@@ -43,10 +57,10 @@ namespace Comical.Services
                 if (retries >= 3)
                 {
                     repository.ChangeBlocked(user.Id, true);
-                    return "Se ha superado la cantidad de intentos, el usuario ha sido bloqueado.";
+                    return logEventAndReturn("Se ha superado la cantidad de intentos, el usuario ha sido bloqueado.");
                 }
 
-                return "La contraseña es incorrecta.";
+                return logEventAndReturn("La contraseña es incorrecta.");
             }
 
             IEnumerable<string> checksumErrors = new List<string>();
@@ -66,13 +80,13 @@ namespace Comical.Services
             if  (databaseStatus.UnderMaintenance)
             {
                 var canContinue = AuthorizationService.obj.IsEnabledFor(user.Id, PermissionCodes.UnderMaintenance_CanLogin);
-                if (!canContinue) return "El sistema se encuentra en mantenimiento.";
+                if (!canContinue) return logEventAndReturn("El sistema se encuentra en mantenimiento.");
             }
 
             if (databaseStatus.HasChecksumError)
             {
                 var canContinue = AuthorizationService.obj.IsEnabledFor(user.Id, PermissionCodes.HasChecksumError_CanLogin);
-                if (!canContinue) return "El sistema se encuentra en mantenimiento.";
+                if (!canContinue) return logEventAndReturn("El sistema se encuentra en mantenimiento.");
 
                 if (checksumErrors.Any())
                 {
@@ -84,7 +98,8 @@ namespace Comical.Services
                     };
                 }
             }
-            
+
+            logEvent("Autenticación exitosa.");
             return user.Id;
         }
 

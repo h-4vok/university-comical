@@ -8,12 +8,14 @@ BEGIN
 	INSERT HistoryEvent (
 		Section,
 		Message,
-		UserId
+		UserId,
+		DateLogged
 	)
 	SELECT
 		Section = @Section,
 		Message = @Message,
-		UserId = @UserId
+		UserId = @UserId,
+		DateLogged = GETDATE()
 
 	DECLARE @id INT = SCOPE_IDENTITY()
 	SELECT @id
