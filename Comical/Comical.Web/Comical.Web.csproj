@@ -147,6 +147,7 @@
     <Content Include="Content\_bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
+    <Content Include="ErrorTest.aspx" />
     <Content Include="Errors.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -223,6 +224,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorTest.aspx.cs">
+      <DependentUpon>ErrorTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorTest.aspx.designer.cs">
+      <DependentUpon>ErrorTest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Errors.aspx.cs">
       <DependentUpon>Errors.aspx</DependentUpon>
