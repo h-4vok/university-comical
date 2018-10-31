@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Comical.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -17,6 +18,13 @@ namespace Comical.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             DependencyInjectionConfig.Config();
+        }
+
+        void Application_Error(object sender, EventArgs e)
+        {
+            var ex = Server.GetLastError();
+
+            LoggingService.obj.Log("Global", ex);
         }
     }
 }
