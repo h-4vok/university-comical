@@ -1,13 +1,13 @@
 ﻿CREATE PROCEDURE Security_doRestore
-	@backup_fileName_p NVARCHAR(500),
-	@DBName NVARCHAR(50)
+	@filepath NVARCHAR(500),
+	@dbname NVARCHAR(50)
 AS
 BEGIN
 	
 	-- Kill any open connections to this database
-	EXEC Database_killAll @DBName    
+	EXEC Database_killAll @dbname
 
 	-- Restore database using the given backup filename
-	RESTORE DATABASE @DBName FROM DISK = @backup_FileName_p WITH RECOVERY, REPLACE  
+	RESTORE DATABASE @DBName FROM DISK = @filepath WITH RECOVERY, REPLACE  
 
 END

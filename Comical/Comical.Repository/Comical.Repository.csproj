@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BackupRepository.cs" />
     <Compile Include="BaseRepository.cs" />
     <Compile Include="DatabaseStatusRepository.cs" />
     <Compile Include="HistoryEventRepository.cs" />
