@@ -24,5 +24,6 @@ namespace Comical.Models.Enums
         public static readonly string VerifierDigits_CanFix = "VerifierDigits_CanFix";
         public static readonly string VerifierDigits_CanRead = "VerifierDigits_CanRead";
         public static readonly string BackupAndRestore = "BackupAndRestore";
+        public static readonly string Permission_CanRead = "Permission_CanRead";
     }
 }

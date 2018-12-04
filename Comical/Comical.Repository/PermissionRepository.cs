@@ -1,4 +1,5 @@
-﻿using Comical.Models.Common;
+﻿using Comical.Models;
+using Comical.Models.Common;
 using DBNostalgia;
 using System;
 using System.Collections.Generic;
@@ -33,10 +34,31 @@ namespace Comical.Repository
             return output;
         }
 
+        public IEnumerable<Permission> Get()
+        {
+            var output = this.UnitOfWork.GetDirect(
+                "Permission_get",
+                this.Fetch
+                );
+
+            return output;
+        }
+
         protected string FetchPermissionCodes(IDataReader reader)
         {
             var code = reader.GetString("Code");
             return code;
+        }
+
+        protected Permission Fetch(IDataReader reader)
+        {
+            var item = new Permission
+            {
+                Id = reader.GetInt32("Id"),
+                Code = reader.GetString("Code")
+            };
+
+            return item;
         }
 
     }

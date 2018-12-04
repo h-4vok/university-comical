@@ -75,6 +75,9 @@
                             <li class="nav-item" runat="server" id="menuOptionBackups">
                                 <a class="nav-link" runat="server" href="~/Backups">Resguardos</a>
                             </li>
+                            <li class="nav-item" runat="server" id="menuOptionPermissions">
+                                <a class="nav-link" runat="server" href="~/Permissions">Permisos</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" runat="server" href="~/About">Sobre Nosotros</a>
                             </li>

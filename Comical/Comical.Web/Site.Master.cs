@@ -31,6 +31,8 @@ namespace Comical.Web
                 this.menuOptionHistoryExceptions.Visible = this.sessionService.Permissions.Contains(PermissionCodes.ErrorLogging_CanRead);
                 this.menuOptionVerifiers.Visible = this.sessionService.Permissions.Contains(PermissionCodes.VerifierDigits_CanRead);
                 this.menuOptionBackups.Visible = this.sessionService.Permissions.Contains(PermissionCodes.BackupAndRestore);
+
+                this.menuOptionPermissions.Visible = this.sessionService.Permissions.Contains(PermissionCodes.Permission_CanRead);
             }
             else
             {
@@ -38,6 +40,8 @@ namespace Comical.Web
                 this.menuOptionHistoryExceptions.Visible = false;
                 this.menuOptionVerifiers.Visible = false;
                 this.menuOptionBackups.Visible = false;
+
+                this.menuOptionPermissions.Visible = false;
             }
         }
 

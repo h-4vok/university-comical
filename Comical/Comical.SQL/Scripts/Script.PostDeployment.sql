@@ -51,7 +51,8 @@ FROM (
 	SELECT Code = 'HasChecksumError_CanLogin' UNION
 	SELECT Code = 'VerifierDigits_CanFix' UNION
 	SELECT Code = 'VerifierDigits_CanRead' UNION
-	SELECT Code = 'BackupAndRestore'
+	SELECT Code = 'BackupAndRestore' UNION
+	SELECT Code = 'Permission_CanRead'
 
 	) DATA
 LEFT  JOIN	Permission P

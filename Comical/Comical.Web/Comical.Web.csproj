@@ -148,6 +148,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="Backups.aspx" />
+    <Content Include="Permissions.aspx" />
     <Content Include="ErrorTest.aspx" />
     <Content Include="Errors.aspx" />
     <Content Include="favicon.ico" />
@@ -232,6 +233,13 @@
     </Compile>
     <Compile Include="Backups.aspx.designer.cs">
       <DependentUpon>Backups.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Permissions.aspx.cs">
+      <DependentUpon>Permissions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Permissions.aspx.designer.cs">
+      <DependentUpon>Permissions.aspx</DependentUpon>
     </Compile>
     <Compile Include="ErrorTest.aspx.cs">
       <DependentUpon>ErrorTest.aspx</DependentUpon>
