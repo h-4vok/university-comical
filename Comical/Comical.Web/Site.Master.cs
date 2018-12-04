@@ -30,20 +30,28 @@ namespace Comical.Web
                 this.menuOptionHistoryEvents.Visible = this.sessionService.Permissions.Contains(PermissionCodes.InfoLogging_CanRead);
                 this.menuOptionHistoryExceptions.Visible = this.sessionService.Permissions.Contains(PermissionCodes.ErrorLogging_CanRead);
                 this.menuOptionVerifiers.Visible = this.sessionService.Permissions.Contains(PermissionCodes.VerifierDigits_CanRead);
+                this.menuOptionBackups.Visible = this.sessionService.Permissions.Contains(PermissionCodes.BackupAndRestore);
             }
             else
             {
                 this.menuOptionHistoryEvents.Visible = false;
                 this.menuOptionHistoryExceptions.Visible = false;
                 this.menuOptionVerifiers.Visible = false;
+                this.menuOptionBackups.Visible = false;
             }
         }
 
         internal void SetupSessionService()
         {
             sessionService.CurrentUserId = Session["UserId"].AsInt();
+            sessionService.CurrentUserName = Session["UserName"].AsString();
             if (sessionService.CurrentUserId > 0)
                 sessionService.Permissions = AuthorizationService.obj.GetPermissionCodes(sessionService.CurrentUserId);
+        }
+
+        internal string GetCurrentUserName()
+        {
+            return sessionService.CurrentUserName;
         }
     }
 }

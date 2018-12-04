@@ -97,6 +97,7 @@
   <ItemGroup>
     <Compile Include="AuthenticationService.cs" />
     <Compile Include="AuthorizationService.cs" />
+    <Compile Include="BackupService.cs" />
     <Compile Include="ChecksumService.cs" />
     <Compile Include="ComicalAPIService.cs" />
     <Compile Include="DatabaseStatusService.cs" />

@@ -10,69 +10,51 @@
 namespace Comical.Web {
     
     
-    public partial class SiteMaster {
+    public partial class Backups {
         
         /// <summary>
-        /// menuOptionLogin control.
+        /// lblError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuOptionLogin;
+        protected global::System.Web.UI.WebControls.Label lblError;
         
         /// <summary>
-        /// menuOptionSignUp control.
+        /// Grid control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuOptionSignUp;
+        protected global::System.Web.UI.WebControls.DataGrid Grid;
         
         /// <summary>
-        /// menuOptionHistoryEvents control.
+        /// DoBackup control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuOptionHistoryEvents;
+        protected global::System.Web.UI.WebControls.Button DoBackup;
         
         /// <summary>
-        /// menuOptionHistoryExceptions control.
+        /// restoreID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuOptionHistoryExceptions;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText restoreID;
         
         /// <summary>
-        /// menuOptionVerifiers control.
+        /// DoRestoreButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuOptionVerifiers;
-        
-        /// <summary>
-        /// menuOptionBackups control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuOptionBackups;
-        
-        /// <summary>
-        /// MainContent control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::System.Web.UI.WebControls.Button DoRestoreButton;
     }
 }

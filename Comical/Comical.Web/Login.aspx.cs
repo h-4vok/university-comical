@@ -40,6 +40,7 @@ namespace Comical.Web
             {
                 this.lblError.Visible = false;
                 Session.Add("UserId", authenticateResponse.UserId);
+                Session.Add("UserName", login);
                 Response.Redirect("Default.aspx");
             }
             else

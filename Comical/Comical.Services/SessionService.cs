@@ -9,6 +9,7 @@ namespace Comical.Services
     public class SessionService : ISessionService
     {
         public int CurrentUserId { get; set; }
+        public string CurrentUserName { get; set; }
         public bool IsAuthenticated { get { return this.CurrentUserId > 0; } }
         public IEnumerable<string> Permissions { get; set; } = new List<string>();
     }
