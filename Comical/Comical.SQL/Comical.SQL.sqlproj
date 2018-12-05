@@ -99,6 +99,9 @@
     <Build Include="dbo\Stored Procedures\Role_update.sql" />
     <Build Include="dbo\Stored Procedures\Role_getById.sql" />
     <Build Include="dbo\Stored Procedures\Role_delete.sql" />
+    <Build Include="dbo\Stored Procedures\Permission_getByRole.sql" />
+    <Build Include="dbo\Stored Procedures\Role_deletePermissions.sql" />
+    <Build Include="dbo\Stored Procedures\Role_newPermission.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.sql" />

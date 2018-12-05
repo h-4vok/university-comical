@@ -26,6 +26,8 @@ namespace Comical.Services
             new PermissionRepository(),
             new RoleRepository(),
             new UserRepository(),
+            new RolePermissionRepository(),
+            new UserRoleRepository()
         };
 
         #endregion

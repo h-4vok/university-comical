@@ -34,7 +34,9 @@ namespace Comical.Repository
             return connection;
         }
 
-        protected string CalculatedTableName => this.GetType().Name.Replace("Repository", String.Empty);
+        protected string GetCalculatedTableName(string className) => className.Replace("Repository", String.Empty);
+
+        protected string CalculatedTableName => this.GetCalculatedTableName(this.GetType().Name);
 
         protected string TableName { get; }
 

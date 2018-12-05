@@ -50,6 +50,17 @@ namespace Comical.Repository
             return code;
         }
 
+        public IEnumerable<Permission> GetByRole(int roleId)
+        {
+            var output = this.UnitOfWork.GetDirect(
+                "Permission_getByRole",
+                this.Fetch,
+                ParametersBuilder.With("roleId", roleId)
+            );
+
+            return output;
+        }
+
         protected Permission Fetch(IDataReader reader)
         {
             var item = new Permission

@@ -20,7 +20,23 @@
 
         </div>
 
-        <asp:Button class="btn btn-primary btn-lg btn-block center" runat="server" OnClick="ActionButton_Click" ID="ActionButton" Text="Crear" />
+        <div class="form-group center text-center mtb-20">
+
+            <label class="display-block">Permisos</label>
+            <asp:ListBox
+                ID="permissionsList"
+                runat="server"
+                SelectionMode="Multiple"
+                CssClass="listbox-medium"
+                >
+
+            </asp:ListBox>
+
+        </div>
+
+        <div class="form-group center text-center mtb-20">
+            <asp:Button class="btn btn-primary btn-lg btn-block center" runat="server" OnClick="ActionButton_Click" ID="ActionButton" Text="Crear" />
+        </div>
 
         <div class="center p-2">
             <asp:Label CssClass="error-label" ID="lblError" Visible="false" runat="server"></asp:Label>

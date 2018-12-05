@@ -1,4 +1,5 @@
 ﻿using Comical.Models;
+using Comical.Models.ViewModels;
 using DBNostalgia;
 using System;
 using System.Collections.Generic;
@@ -45,8 +46,10 @@ namespace Comical.Repository
             return output;
         }
 
-        public void New(Role role)
+        public void New(RoleWithPermissionsViewModel role)
         {
+            var permissionTableName = "RolePermission";
+
             this.UnitOfWork.Run(() =>
             {
                 var id = this.UnitOfWork.Scalar(
@@ -56,8 +59,20 @@ namespace Comical.Repository
                         .And("Enabled", role.Enabled)
                     ).AsInt();
 
+                foreach(var permission in role.Permissions)
+                {
+                    var relationshipId = this.UnitOfWork.Scalar(
+                        "Role_newPermission",
+                        ParametersBuilder.With("roleId", id)
+                        .And("permissionId", permission.Key)
+                    ).AsInt();
+
+                    this.SetHorizontalVerifier(relationshipId, permissionTableName);
+                }
+
                 this.SetHorizontalVerifier(id);
                 this.SetVerticalVerifierClosure();
+                this.SetVerticalVerifierClosure(permissionTableName);
             });
         }
 
@@ -73,8 +88,10 @@ namespace Comical.Repository
             });
         }
 
-        public void Update(Role role)
+        public void Update(RoleWithPermissionsViewModel role)
         {
+            var permissionTableName = "RolePermission";
+
             this.UnitOfWork.Run(() =>
             {
                 this.UnitOfWork.NonQuery(
@@ -85,8 +102,25 @@ namespace Comical.Repository
                         .And("Id", role.Id)
                     );
 
+                this.UnitOfWork.NonQuery(
+                    "Role_deletePermissions",
+                    ParametersBuilder.With("roleId", role.Id)
+                );
+
+                foreach (var permission in role.Permissions)
+                {
+                    var relationshipId = this.UnitOfWork.Scalar(
+                        "Role_newPermission",
+                        ParametersBuilder.With("roleId", role.Id)
+                        .And("permissionId", permission.Key)
+                    ).AsInt();
+
+                    this.SetHorizontalVerifier(relationshipId, permissionTableName);
+                }
+
                 this.SetHorizontalVerifier(role.Id);
                 this.SetVerticalVerifierClosure();
+                this.SetVerticalVerifierClosure(permissionTableName);
             });
         }
     }

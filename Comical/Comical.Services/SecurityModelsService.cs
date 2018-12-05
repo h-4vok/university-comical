@@ -1,4 +1,5 @@
 ﻿using Comical.Models;
+using Comical.Models.ViewModels;
 using Comical.Repository;
 using System;
 using System.Collections.Generic;
@@ -29,9 +30,18 @@ namespace Comical.Services
             return output;
         }
 
-        public Role GetRole(int roleId)
+        public RoleWithPermissionsViewModel GetRoleWithPermissions(int roleId)
         {
-            var output = this.Roles.GetById(roleId);
+            var output = new RoleWithPermissionsViewModel();
+            var role = this.Roles.GetById(roleId);
+            output.Id = role.Id;
+            output.Code = role.Code;
+            output.Description = role.Description;
+            output.Enabled = role.Enabled;
+
+            var permissions = this.Permissions.GetByRole(roleId);
+            permissions
+                .ForEach(p => output.Permissions.Add(p.Id, p));
 
             return output;
         }
@@ -43,12 +53,12 @@ namespace Comical.Services
             return output;
         }
 
-        public void CreateRole(Role role)
+        public void CreateRole(RoleWithPermissionsViewModel role)
         {
             this.Roles.New(role);
         }
 
-        public void UpdateRole(Role role)
+        public void UpdateRole(RoleWithPermissionsViewModel role)
         {
             this.Roles.Update(role);
         }

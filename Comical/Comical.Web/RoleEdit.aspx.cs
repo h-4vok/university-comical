@@ -1,4 +1,6 @@
-﻿using Comical.Services;
+﻿using Comical.Models;
+using Comical.Models.ViewModels;
+using Comical.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,18 +18,38 @@ namespace Comical.Web
         {
             this.CurrentRoleId = Request.QueryString["Id"].AsInt();
 
-            if (!this.IsPostBack && this.CurrentRoleId > 0)
+            if (!this.IsPostBack)
             {
-                this.LoadModel();
+                this.LoadPermissionsList();
+
+                if (this.CurrentRoleId > 0)
+                {
+                    this.LoadModel();
+                }
             }
+        }
+
+        protected void LoadPermissionsList()
+        {
+            var permissions = SecurityModelsService.obj.GetPermissions();
+
+            permissions
+                .Select(p => new ListItem(p.Code, p.Id.AsString()))
+                .ForEach(this.permissionsList.Items.Add);
         }
 
         protected void LoadModel()
         {
-            var model = SecurityModelsService.obj.GetRole(this.CurrentRoleId);
+            var model = SecurityModelsService.obj.GetRoleWithPermissions(this.CurrentRoleId);
 
             this.codeInput.Value = model.Code;
             this.descriptionInput.Value = model.Description;
+
+            foreach (ListItem item in this.permissionsList.Items)
+            {
+                var permissionId = item.Value.AsInt();
+                item.Selected = model.Permissions.ContainsKey(permissionId);
+            }
         }
 
         protected void ShowError(string errorMessage)
@@ -50,13 +72,23 @@ namespace Comical.Web
                 return;
             }
 
-            var role = new Comical.Models.Role
+            var role = new RoleWithPermissionsViewModel
             {
                 Id = this.CurrentRoleId,
                 Code = this.codeInput.Value,
                 Description = this.descriptionInput.Value,
                 Enabled = true,
             };
+
+            foreach(ListItem item in this.permissionsList.Items)
+            {
+                if (item.Selected)
+                {
+                    var permissionId = item.Value.AsInt();
+
+                    role.Permissions.Add(permissionId, new Permission { Id = permissionId, Code = item.Text });
+                }
+            }
 
             if (role.Id > 0)
             {
