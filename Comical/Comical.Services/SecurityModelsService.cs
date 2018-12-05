@@ -26,5 +26,13 @@ namespace Comical.Services
 
             return output;
         }
+
+        public IEnumerable<Role> GetRoles()
+        {
+            var repository = new RoleRepository();
+            var output = repository.Get();
+
+            return output;
+        }
     }
 }

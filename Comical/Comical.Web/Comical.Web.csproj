@@ -148,6 +148,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="Backups.aspx" />
+    <Content Include="Roles.aspx" />
     <Content Include="Permissions.aspx" />
     <Content Include="ErrorTest.aspx" />
     <Content Include="Errors.aspx" />
@@ -233,6 +234,13 @@
     </Compile>
     <Compile Include="Backups.aspx.designer.cs">
       <DependentUpon>Backups.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Roles.aspx.cs">
+      <DependentUpon>Roles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Roles.aspx.designer.cs">
+      <DependentUpon>Roles.aspx</DependentUpon>
     </Compile>
     <Compile Include="Permissions.aspx.cs">
       <DependentUpon>Permissions.aspx</DependentUpon>

@@ -94,6 +94,7 @@
     <Build Include="dbo\Stored Procedures\HistoryEvent_get.sql" />
     <Build Include="dbo\Stored Procedures\HistoryException_get.sql" />
     <Build Include="dbo\Stored Procedures\Permission_get.sql" />
+    <Build Include="dbo\Stored Procedures\Role_get.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.sql" />

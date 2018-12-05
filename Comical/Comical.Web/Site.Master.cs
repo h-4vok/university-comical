@@ -33,6 +33,7 @@ namespace Comical.Web
                 this.menuOptionBackups.Visible = this.sessionService.Permissions.Contains(PermissionCodes.BackupAndRestore);
 
                 this.menuOptionPermissions.Visible = this.sessionService.Permissions.Contains(PermissionCodes.Permission_CanRead);
+                this.menuOptionRoles.Visible = this.sessionService.Permissions.Contains(PermissionCodes.Roles_CanRead);
             }
             else
             {
@@ -42,7 +43,17 @@ namespace Comical.Web
                 this.menuOptionBackups.Visible = false;
 
                 this.menuOptionPermissions.Visible = false;
+                this.menuOptionRoles.Visible = false;
             }
+        }
+
+        internal bool UserHasPermission(string permissionCode)
+        {
+            if (!sessionService.Permissions.Any())
+                sessionService.Permissions = AuthorizationService.obj.GetPermissionCodes(sessionService.CurrentUserId);
+
+            var output = this.sessionService.Permissions.Contains(permissionCode);
+            return output;
         }
 
         internal void SetupSessionService()

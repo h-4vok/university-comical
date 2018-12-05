@@ -52,7 +52,9 @@ FROM (
 	SELECT Code = 'VerifierDigits_CanFix' UNION
 	SELECT Code = 'VerifierDigits_CanRead' UNION
 	SELECT Code = 'BackupAndRestore' UNION
-	SELECT Code = 'Permission_CanRead'
+	SELECT Code = 'Permission_CanRead' UNION
+	SELECT Code = 'Roles_CanRead' UNION
+	SELECT Code = 'Roles_CanEdit'
 
 	) DATA
 LEFT  JOIN	Permission P
