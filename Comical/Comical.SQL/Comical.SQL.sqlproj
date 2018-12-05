@@ -95,6 +95,10 @@
     <Build Include="dbo\Stored Procedures\HistoryException_get.sql" />
     <Build Include="dbo\Stored Procedures\Permission_get.sql" />
     <Build Include="dbo\Stored Procedures\Role_get.sql" />
+    <Build Include="dbo\Stored Procedures\Role_new.sql" />
+    <Build Include="dbo\Stored Procedures\Role_update.sql" />
+    <Build Include="dbo\Stored Procedures\Role_getById.sql" />
+    <Build Include="dbo\Stored Procedures\Role_delete.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.sql" />

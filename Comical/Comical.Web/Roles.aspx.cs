@@ -69,17 +69,15 @@ namespace Comical.Web
 
         protected void Grid_Delete(object source, DataGridCommandEventArgs e)
         {
+            var id = e.Item.Cells[0].Text.AsInt();
+            SecurityModelsService.obj.DeleteRole(id);
 
-        }
-
-        protected void Grid_Update(object source, DataGridCommandEventArgs e)
-        {
-
+            this.LoadData();
         }
 
         protected void NewRoleButton_Click(object source, EventArgs e)
         {
-            Response.Redirect("Role.aspx");
+            Response.Redirect("RoleEdit.aspx");
         }
     }
 }

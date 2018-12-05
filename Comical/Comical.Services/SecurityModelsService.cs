@@ -19,20 +19,43 @@ namespace Comical.Services
 
         #endregion
 
+        private PermissionRepository Permissions { get; } = new PermissionRepository();
+        private RoleRepository Roles { get; } = new RoleRepository();
+
         public IEnumerable<Permission> GetPermissions()
         {
-            var repository = new PermissionRepository();
-            var output = repository.Get();
+            var output = this.Permissions.Get();
+
+            return output;
+        }
+
+        public Role GetRole(int roleId)
+        {
+            var output = this.Roles.GetById(roleId);
 
             return output;
         }
 
         public IEnumerable<Role> GetRoles()
         {
-            var repository = new RoleRepository();
-            var output = repository.Get();
+            var output = this.Roles.Get();
 
             return output;
+        }
+
+        public void CreateRole(Role role)
+        {
+            this.Roles.New(role);
+        }
+
+        public void UpdateRole(Role role)
+        {
+            this.Roles.Update(role);
+        }
+
+        public void DeleteRole(int id)
+        {
+            this.Roles.Delete(id);
         }
     }
 }

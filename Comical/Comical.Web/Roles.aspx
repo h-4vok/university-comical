@@ -20,7 +20,6 @@
             ID="Grid"
             AutoGenerateColumns="false"
             OnDeleteCommand="Grid_Delete"
-            OnUpdateCommand="Grid_Update"
             DataKeyField="Id"
             >
 
@@ -29,7 +28,7 @@
                 <asp:BoundColumn HeaderStyle-CssClass="text-center"  HeaderText="Código" DataField="Code"></asp:BoundColumn>
                 <asp:BoundColumn HeaderStyle-CssClass="text-center" HeaderText="Descripción" DataField="Description"></asp:BoundColumn>
                 <asp:BoundColumn ItemStyle-CssClass="text-center" HeaderStyle-CssClass="text-center" HeaderText="Habilitado" DataField="Enabled"></asp:BoundColumn>
-                <asp:HyperLinkColumn ItemStyle-CssClass="text-center" HeaderStyle-CssClass="text-center" DataNavigateUrlFormatString="Role.aspx?ID={0}" DataNavigateUrlField="Id" Text="Actualizar" HeaderText="Actualizar"></asp:HyperLinkColumn>
+                <asp:HyperLinkColumn ItemStyle-CssClass="text-center" HeaderStyle-CssClass="text-center" DataNavigateUrlFormatString="RoleEdit.aspx?ID={0}" DataNavigateUrlField="Id" Text="Actualizar" HeaderText="Actualizar"></asp:HyperLinkColumn>
                 <asp:ButtonColumn ItemStyle-CssClass="text-center" HeaderStyle-CssClass="text-center" CommandName="Delete" HeaderText="Eliminar" Text="Eliminar"></asp:ButtonColumn>
             </Columns>
 

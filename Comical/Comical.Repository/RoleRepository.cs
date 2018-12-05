@@ -33,5 +33,61 @@ namespace Comical.Repository
 
             return model;
         }
+
+        public Role GetById(int roleId)
+        {
+            var output = this.UnitOfWork.GetDirect(
+                "Role_getById",
+                this.FetchRole,
+                ParametersBuilder.With("Id", roleId)
+            ).FirstOrDefault();
+
+            return output;
+        }
+
+        public void New(Role role)
+        {
+            this.UnitOfWork.Run(() =>
+            {
+                var id = this.UnitOfWork.Scalar(
+                        "Role_new",
+                        ParametersBuilder.With("Code", role.Code)
+                        .And("Description", role.Description)
+                        .And("Enabled", role.Enabled)
+                    ).AsInt();
+
+                this.SetHorizontalVerifier(id);
+                this.SetVerticalVerifierClosure();
+            });
+        }
+
+        public void Delete(int id)
+        {
+            this.UnitOfWork.Run(() =>
+            {
+                this.UnitOfWork.NonQuery(
+                    "Role_delete",
+                    ParametersBuilder.With("Id", id));
+
+                this.SetVerticalVerifierClosure();
+            });
+        }
+
+        public void Update(Role role)
+        {
+            this.UnitOfWork.Run(() =>
+            {
+                this.UnitOfWork.NonQuery(
+                        "Role_update",
+                        ParametersBuilder.With("Code", role.Code)
+                        .And("Description", role.Description)
+                        .And("Enabled", role.Enabled)
+                        .And("Id", role.Id)
+                    );
+
+                this.SetHorizontalVerifier(role.Id);
+                this.SetVerticalVerifierClosure();
+            });
+        }
     }
 }
