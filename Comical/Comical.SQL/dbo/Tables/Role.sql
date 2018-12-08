@@ -4,5 +4,5 @@
 	Code NVARCHAR(70),
 	Description NVARCHAR(70),
 	Enabled BIT,
-	__HorizontalVerifier__ NVARCHAR(500),
+	__HorizontalVerifier__ NVARCHAR(MAX),
 )

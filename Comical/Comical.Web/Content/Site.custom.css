@@ -31,6 +31,14 @@
     margin-top: 2.5px;
 }
 
+.success-label {
+    color: greenyellow;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 2.5px;
+    margin-top: 2.5px;
+}
+
 .validation-errors {
     padding: 20px;
 }

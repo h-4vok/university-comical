@@ -8,5 +8,5 @@
 	ExceptionStackTrace NVARCHAR(MAX),
 	UserId INT,
 	DateLogged DATETIME DEFAULT GETUTCDATE(),
-	__HorizontalVerifier__ NVARCHAR(500),
+	__HorizontalVerifier__ NVARCHAR(MAX),
 )

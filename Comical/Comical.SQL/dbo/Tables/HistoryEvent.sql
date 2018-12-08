@@ -5,5 +5,5 @@
 	Message NVARCHAR(300) NOT NULL,
 	UserId INT NULL,
 	DateLogged DATETIME DEFAULT GETUTCDATE(),
-	__HorizontalVerifier__ NVARCHAR(500),
+	__HorizontalVerifier__ NVARCHAR(MAX),
 )

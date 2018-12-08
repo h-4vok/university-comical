@@ -6,5 +6,5 @@
 	Enabled BIT DEFAULT (0),
 	Blocked BIT DEFAULT (1),
 	Retries INT DEFAULT (0),
-	__HorizontalVerifier__ NVARCHAR(500)
+	__HorizontalVerifier__ NVARCHAR(MAX)
 )

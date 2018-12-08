@@ -2,12 +2,14 @@
 using Comical.Models.Http;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Comical.Services
 {
@@ -39,8 +41,15 @@ namespace Comical.Services
                     using(var content = response.Content)
                     {
                         var jsonResponse = await content.ReadAsStringAsync().ConfigureAwait(false);
-                        var apiResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<ChecksumRecalculationResponse>(jsonResponse);
-                        return apiResponse.Success;
+                        var apiResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<string>(jsonResponse);
+                        var serializer = new XmlSerializer(typeof(ChecksumRecalculationResponse), new XmlRootAttribute("ChecksumRecalculationResponse"));
+                        ChecksumRecalculationResponse responseObject;
+
+                        using(var reader = new StringReader(apiResponse))
+                        {
+                            responseObject = serializer.Deserialize(reader) as ChecksumRecalculationResponse;
+                        }
+                        return responseObject.Success;
                     }
                 }
                 catch

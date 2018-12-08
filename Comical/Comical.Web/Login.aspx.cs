@@ -15,6 +15,16 @@ namespace Comical.Web
 
         }
 
+        private void SetSuccessLabels()
+        {
+            this.divUser.Visible = false;
+            this.divPassword.Visible = false;
+            this.LoginButton.Visible = false;
+
+            this.divSuccess.Visible = true;
+            this.lblSuccess.Visible = true;
+        }
+
         protected void LoginButton_Click(object sender, EventArgs e)
         {
             var login = this.loginInput.Value;
@@ -29,6 +39,8 @@ namespace Comical.Web
                 const string checksumErrorsFormat = "Atención. Se encontraron {0} errores en dígitos verificadores.";
                 this.lblError.Text = String.Format(checksumErrorsFormat, authenticateResponse.ChecksumErrors.Count());
                 this.lblError.Visible = true;
+
+                this.SetSuccessLabels();
 
                 if (this.Master is SiteMaster master)
                 {

@@ -2,5 +2,5 @@
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY(1, 1),
 	Code NVARCHAR(70),
-	__HorizontalVerifier__ NVARCHAR(500),
+	__HorizontalVerifier__ NVARCHAR(MAX),
 )

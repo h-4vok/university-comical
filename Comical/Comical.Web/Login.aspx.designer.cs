@@ -13,6 +13,15 @@ namespace Comical.Web {
     public partial class Login {
         
         /// <summary>
+        /// divUser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divUser;
+        
+        /// <summary>
         /// loginInput control.
         /// </summary>
         /// <remarks>
@@ -22,6 +31,15 @@ namespace Comical.Web {
         protected global::System.Web.UI.HtmlControls.HtmlInputText loginInput;
         
         /// <summary>
+        /// divPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divPassword;
+        
+        /// <summary>
         /// passwordInput control.
         /// </summary>
         /// <remarks>
@@ -29,6 +47,24 @@ namespace Comical.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputPassword passwordInput;
+        
+        /// <summary>
+        /// divSuccess control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divSuccess;
+        
+        /// <summary>
+        /// lblSuccess control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSuccess;
         
         /// <summary>
         /// LoginButton control.
