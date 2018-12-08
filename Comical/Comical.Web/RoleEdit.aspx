@@ -35,7 +35,7 @@
         </div>
 
         <div class="form-group center text-center mtb-20">
-            <asp:Button class="btn btn-primary btn-lg btn-block center" runat="server" OnClick="ActionButton_Click" ID="ActionButton" Text="Crear" />
+            <asp:Button class="btn btn-primary btn-lg btn-block center" runat="server" OnClick="ActionButton_Click" ID="ActionButton" Text="Finalizar" />
         </div>
 
         <div class="center p-2">
