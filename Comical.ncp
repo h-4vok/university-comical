@@ -1,0 +1,717 @@
+<Project>
+  <Name>Comical</Name>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
+    <Name>Comical.Models.dll</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>EnumerableExtensions</Name>
+        <Access>Public</Access>
+        <Location left="812" top="210" />
+        <Size width="335" height="94" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public static Void ForEach(IEnumerable&lt;T&gt; subject, Action&lt;T&gt; closure)</Member>
+        <Modifier>Static</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Backup</Name>
+        <Access>Public</Access>
+        <Location left="175" top="625" />
+        <Size width="206" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public String FilePath { get; set; }</Member>
+        <Member type="Property">public DateTime BackupDate { get; set; }</Member>
+        <Member type="Property">public String CreatedBy { get; set; }</Member>
+        <Member type="Constructor">public Backup()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>BaseModel</Name>
+        <Access>Public</Access>
+        <Location left="559" top="745" />
+        <Size width="236" height="128" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public Int32 Id { get; set; }</Member>
+        <Member type="Constructor">protected BaseModel()</Member>
+        <Member type="Method">public IEnumerable&lt;String&gt; GetPropertiesList()</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>DatabaseStatus</Name>
+        <Access>Public</Access>
+        <Location left="1012" top="328" />
+        <Size width="231" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public String DatabaseName { get; set; }</Member>
+        <Member type="Property">public Boolean UnderMaintenance { get; set; }</Member>
+        <Member type="Property">public Boolean HasChecksumError { get; set; }</Member>
+        <Member type="Constructor">public DatabaseStatus()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>HistoryEvent</Name>
+        <Access>Public</Access>
+        <Location left="775" top="352" />
+        <Size width="206" height="162" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public String Section { get; set; }</Member>
+        <Member type="Property">public String Message { get; set; }</Member>
+        <Member type="Property">public Int32? UserId { get; set; }</Member>
+        <Member type="Property">public DateTime DateLogged { get; set; }</Member>
+        <Member type="Constructor">public HistoryEvent()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>HistoryException</Name>
+        <Access>Public</Access>
+        <Location left="1012" top="533" />
+        <Size width="230" height="213" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public String Section { get; set; }</Member>
+        <Member type="Property">public String ExceptionType { get; set; }</Member>
+        <Member type="Property">public String ExceptionSource { get; set; }</Member>
+        <Member type="Property">public String ExceptionMessage { get; set; }</Member>
+        <Member type="Property">public String ExceptionStackTrace { get; set; }</Member>
+        <Member type="Property">public Int32? UserId { get; set; }</Member>
+        <Member type="Property">public DateTime DateLogged { get; set; }</Member>
+        <Member type="Constructor">public HistoryException()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Permission</Name>
+        <Access>Public</Access>
+        <Location left="572" top="352" />
+        <Size width="163" height="111" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public String Code { get; set; }</Member>
+        <Member type="Constructor">public Permission()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Role</Name>
+        <Access>Public</Access>
+        <Location left="375" top="471" />
+        <Size width="184" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public String Code { get; set; }</Member>
+        <Member type="Property">public String Description { get; set; }</Member>
+        <Member type="Property">public Boolean Enabled { get; set; }</Member>
+        <Member type="Constructor">public Role()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>User</Name>
+        <Access>Public</Access>
+        <Location left="212" top="830" />
+        <Size width="226" height="196" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public String Login { get; set; }</Member>
+        <Member type="Property">public String Password { get; set; }</Member>
+        <Member type="Property">public Boolean Enabled { get; set; }</Member>
+        <Member type="Property">public Boolean Blocked { get; set; }</Member>
+        <Member type="Property">public Int32 Retries { get; set; }</Member>
+        <Member type="Property">public IEnumerable&lt;Role&gt; Roles { get; set; }</Member>
+        <Member type="Constructor">public User()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>RoleWithPermissionsViewModel</Name>
+        <Access>Public</Access>
+        <Location left="917" top="12" />
+        <Size width="290" height="179" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public Int32 Id { get; set; }</Member>
+        <Member type="Property">public String Code { get; set; }</Member>
+        <Member type="Property">public String Description { get; set; }</Member>
+        <Member type="Property">public Boolean Enabled { get; set; }</Member>
+        <Member type="Property">public IDictionary&lt;Int32, Permission&gt; Permissions { get; }</Member>
+        <Member type="Constructor">public RoleWithPermissionsViewModel()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ChecksumRecalculationRequest</Name>
+        <Access>Public</Access>
+        <Location left="536" top="188" />
+        <Size width="218" height="128" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public String UserName { get; set; }</Member>
+        <Member type="Property">public String Password { get; set; }</Member>
+        <Member type="Constructor">public ChecksumRecalculationRequest()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ChecksumRecalculationResponse</Name>
+        <Access>Public</Access>
+        <Location left="524" top="12" />
+        <Size width="380" height="162" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public Boolean Success { get; set; }</Member>
+        <Member type="Property">public String ErrorMessage { get; set; }</Member>
+        <Member type="Property">public Boolean Error { get; }</Member>
+        <Member type="Constructor">public ChecksumRecalculationResponse()</Member>
+        <Member type="Method">public static implicit operator ChecksumRecalculationResponse(String errorMessage)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>PermissionCodes</Name>
+        <Access>Public</Access>
+        <Location left="309" top="12" />
+        <Size width="207" height="417" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">public String VerifierDigits_CheckOnLogin</Member>
+        <Member type="Field">public String User_New</Member>
+        <Member type="Field">public String User_Update</Member>
+        <Member type="Field">public String User_Disable</Member>
+        <Member type="Field">public String User_Enable</Member>
+        <Member type="Field">public String User_Delete</Member>
+        <Member type="Field">public String User_Read</Member>
+        <Member type="Field">public String ShoppingCart_CanUse</Member>
+        <Member type="Field">public String Account_CanUse</Member>
+        <Member type="Field">public String InfoLogging_CanRead</Member>
+        <Member type="Field">public String ErrorLogging_CanRead</Member>
+        <Member type="Field">public String UnderMaintenance_CanLogin</Member>
+        <Member type="Field">public String HasChecksumError_CanLogin</Member>
+        <Member type="Field">public String VerifierDigits_CanFix</Member>
+        <Member type="Field">public String VerifierDigits_CanRead</Member>
+        <Member type="Field">public String BackupAndRestore</Member>
+        <Member type="Field">public String Permission_CanRead</Member>
+        <Member type="Field">public String Roles_CanRead</Member>
+        <Member type="Field">public String Roles_CanEdit</Member>
+        <Member type="Constructor">static PermissionCodes()</Member>
+        <Modifier>Static</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ComicalConfiguration</Name>
+        <Access>Public</Access>
+        <Location left="12" top="188" />
+        <Size width="246" height="196" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public static String ComicalConnectionString { get; }</Member>
+        <Member type="Property">public static String MasterConnectionString { get; }</Member>
+        <Member type="Property">public static String ComicalAPIUri { get; }</Member>
+        <Member type="Property">public static String BackupPath { get; }</Member>
+        <Member type="Property">public static Int32 ChecksumCheckDOP { get; }</Member>
+        <Member type="Property">public static Int32 ChecksumCheckByModelDOP { get; }</Member>
+        <Member type="Property">public static Int32 ChecksumResetDOP { get; }</Member>
+        <Modifier>Static</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Crypto3DES</Name>
+        <Access>Public</Access>
+        <Location left="12" top="12" />
+        <Size width="277" height="162" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public static Crypto3DES obj { get; }</Member>
+        <Member type="Constructor">private Crypto3DES()</Member>
+        <Member type="Constructor">static Crypto3DES()</Member>
+        <Member type="Method">public String GetChecksum(IEnumerable&lt;String&gt; data)</Member>
+        <Member type="Method">protected String Encrypt(String source, String key)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+    </Entities>
+    <Relationships>
+      <Relationship type="Generalization" first="1" second="2">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>406</X>
+          <Y>783</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>534</X>
+          <Y>783</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Generalization" first="4" second="2">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="5" second="2">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>843</X>
+          <Y>787</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Generalization" first="6" second="2">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="7" second="2">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>598</X>
+          <Y>709</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Generalization" first="8" second="2">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>534</X>
+          <Y>802</Y>
+        </BendPoint>
+      </Relationship>
+    </Relationships>
+  </ProjectItem>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
+    <Name>Comical.Repository.dll</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>BackupRepository</Name>
+        <Access>Public</Access>
+        <Location left="557" top="573" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public BackupRepository()</Member>
+        <Member type="Method">public Void DoBackup(String filepath, String createdBy)</Member>
+        <Member type="Method">public Void DoRestore(Int32 backupId)</Member>
+        <Member type="Method">public IEnumerable&lt;Backup&gt; Get()</Member>
+        <Member type="Method">protected Backup Fetch(IDataReader reader)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>BaseRepository</Name>
+        <Access>Public</Access>
+        <Location left="860" top="326" />
+        <Size width="162" height="468" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private readonly IEnumerable&lt;String&gt; columnsToAvoid</Member>
+        <Member type="Property">protected String CalculatedTableName { get; }</Member>
+        <Member type="Property">protected String TableName { get; }</Member>
+        <Member type="Property">protected UnitOfWork UnitOfWork { get; set; }</Member>
+        <Member type="Constructor">public BaseRepository(String tableName, String connectionString)</Member>
+        <Member type="Method">protected IDbConnection BuildConnection(String connectionString)</Member>
+        <Member type="Method">protected String GetCalculatedTableName(String className)</Member>
+        <Member type="Method">protected String CreateWhere(Int32 recordId)</Member>
+        <Member type="Method">protected String CalculateHorizontalVerifier(Int32 recordId)</Member>
+        <Member type="Method">protected String CalculateHorizontalVerifier(String where, String table)</Member>
+        <Member type="Method">protected String CalculateHorizontalVerifier(IEnumerable&lt;String&gt; values)</Member>
+        <Member type="Method">protected Void SetHorizontalVerifier(Int32 id, String table)</Member>
+        <Member type="Method">protected Void SetHorizontalVerifier(Int32 id)</Member>
+        <Member type="Method">protected IEnumerable&lt;String&gt; GetRecordValues(String where, String table)</Member>
+        <Member type="Method">protected IEnumerable&lt;String&gt; FetchRecordValues(IDataReader reader)</Member>
+        <Member type="Method">protected Void SetHorizontalVerifier(String verifier, String where, String table)</Member>
+        <Member type="Method">protected Void SetHorizontalVerifierDirectly(Int32 id, String verifier)</Member>
+        <Member type="Method">public Void SetVerticalVerifierClosure(String table)</Member>
+        <Member type="Method">public Void SetVerticalVerifier(String table)</Member>
+        <Member type="Method">protected String FetchHorizontalVerifier(IDataReader reader)</Member>
+        <Member type="Method">protected RecordModel FetchRecordModel(IDataReader reader)</Member>
+        <Member type="Method">public Void ResetHorizontalVerifiers()</Member>
+        <Member type="Method">public IEnumerable&lt;String&gt; FindChecksumErrors()</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>DatabaseStatusRepository</Name>
+        <Access>Public</Access>
+        <Location left="648" top="326" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public DatabaseStatusRepository()</Member>
+        <Member type="Method">public Void KillAllConnections()</Member>
+        <Member type="Method">public Void SetUnderMaintenace(Boolean underMaintenance)</Member>
+        <Member type="Method">public Void SetHasChecksumError(Boolean hasChecksumError)</Member>
+        <Member type="Method">public DatabaseStatus Get()</Member>
+        <Member type="Method">protected DatabaseStatus Fetch(IDataReader reader)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>HistoryEventRepository</Name>
+        <Access>Public</Access>
+        <Location left="436" top="326" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public HistoryEventRepository()</Member>
+        <Member type="Method">public Int32 New(HistoryEvent model)</Member>
+        <Member type="Method">internal HistoryEvent FetchModel(IDataReader reader)</Member>
+        <Member type="Method">public IEnumerable&lt;HistoryEvent&gt; Get()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>HistoryExceptionRepository</Name>
+        <Access>Public</Access>
+        <Location left="224" top="326" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public HistoryExceptionRepository()</Member>
+        <Member type="Method">public Int32 New(HistoryException model)</Member>
+        <Member type="Method">internal HistoryException FetchModel(IDataReader reader)</Member>
+        <Member type="Method">public IEnumerable&lt;HistoryException&gt; Get()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>PermissionRepository</Name>
+        <Access>Public</Access>
+        <Location left="1049" top="12" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public PermissionRepository()</Member>
+        <Member type="Method">public Boolean IsGrantedTo(Int32 userId, String permissionCode)</Member>
+        <Member type="Method">public IEnumerable&lt;String&gt; GetBy(Int32 userId)</Member>
+        <Member type="Method">public IEnumerable&lt;Permission&gt; Get()</Member>
+        <Member type="Method">protected String FetchPermissionCodes(IDataReader reader)</Member>
+        <Member type="Method">public IEnumerable&lt;Permission&gt; GetByRole(Int32 roleId)</Member>
+        <Member type="Method">protected Permission Fetch(IDataReader reader)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>RolePermissionRepository</Name>
+        <Access>Public</Access>
+        <Location left="860" top="12" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public RolePermissionRepository()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>RoleRepository</Name>
+        <Access>Public</Access>
+        <Location left="648" top="12" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public RoleRepository()</Member>
+        <Member type="Method">public IEnumerable&lt;Role&gt; Get()</Member>
+        <Member type="Method">internal Role FetchRole(IDataReader reader)</Member>
+        <Member type="Method">public Role GetById(Int32 roleId)</Member>
+        <Member type="Method">public Void New(RoleWithPermissionsViewModel role)</Member>
+        <Member type="Method">public Void Delete(Int32 id)</Member>
+        <Member type="Method">public Void Update(RoleWithPermissionsViewModel role)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UserRepository</Name>
+        <Access>Public</Access>
+        <Location left="436" top="12" />
+        <Size width="162" height="264" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public UserRepository()</Member>
+        <Member type="Method">protected Void InsertUserRoles(User model)</Member>
+        <Member type="Method">public Int32 New(User model)</Member>
+        <Member type="Method">public Void Update(User model)</Member>
+        <Member type="Method">public Int32 IncrementRetry(Int32 id)</Member>
+        <Member type="Method">public Void ChangeEnabled(Int32 id, Boolean value)</Member>
+        <Member type="Method">public Void ChangeBlocked(Int32 id, Boolean value)</Member>
+        <Member type="Method">public User Get(Int32 id)</Member>
+        <Member type="Method">public User GetByLogin(String login)</Member>
+        <Member type="Method">public IEnumerable&lt;User&gt; Get()</Member>
+        <Member type="Method">internal User FetchUser(IDataReader reader)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UserRoleRepository</Name>
+        <Access>Public</Access>
+        <Location left="224" top="12" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public UserRoleRepository()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>RecordModel</Name>
+        <Access>Public</Access>
+        <Location left="12" top="12" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public IEnumerable&lt;String&gt; Values { get; set; }</Member>
+        <Member type="Property">public String Verifier { get; set; }</Member>
+        <Member type="Property">public Int32 Id { get; set; }</Member>
+        <Member type="Property">public Object Timestamp { get; set; }</Member>
+        <Member type="Constructor">public RecordModel()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+    </Entities>
+    <Relationships>
+      <Relationship type="Nesting" first="1" second="10">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="0" second="1">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>761</X>
+          <Y>656</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>819</X>
+          <Y>656</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Generalization" first="2" second="1">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="3" second="1">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>623</X>
+          <Y>390</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Generalization" first="4" second="1">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>414</X>
+          <Y>369</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Generalization" first="5" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1094</X>
+          <Y>271</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Generalization" first="6" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="7" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="8" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="9" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+    </Relationships>
+  </ProjectItem>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
+    <Name>Comical.Services.dll</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Interface">
+        <Name>ISessionService</Name>
+        <Access>Public</Access>
+        <Location left="221" top="35" />
+        <Size width="264" height="129" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">Int32 CurrentUserId { get; set; }</Member>
+        <Member type="Property">String CurrentUserName { get; set; }</Member>
+        <Member type="Property">Boolean IsAuthenticated { get; }</Member>
+        <Member type="Property">IEnumerable&lt;String&gt; Permissions { get; set; }</Member>
+      </Entity>
+      <Entity type="Class">
+        <Name>AuthenticationService</Name>
+        <Access>Public</Access>
+        <Location left="1470" top="282" />
+        <Size width="364" height="162" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public AuthenticationService()</Member>
+        <Member type="Method">public AuthenticateResponse Authenticate(String login, String password)</Member>
+        <Member type="Method">protected String ValidateInput(String login, String password)</Member>
+        <Member type="Method">protected Boolean CheckPassword(String actual, String expectedHashed)</Member>
+        <Member type="Method">protected DatabaseStatus GetDatabaseStatus()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>AuthorizationService</Name>
+        <Access>Public</Access>
+        <Location left="1083" top="326" />
+        <Size width="333" height="162" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public static AuthorizationService obj { get; }</Member>
+        <Member type="Constructor">private AuthorizationService()</Member>
+        <Member type="Constructor">static AuthorizationService()</Member>
+        <Member type="Method">public Boolean IsEnabledFor(Int32 userId, String permissionCode)</Member>
+        <Member type="Method">public IEnumerable&lt;String&gt; GetPermissionCodes(Int32 userId)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>BackupService</Name>
+        <Access>Public</Access>
+        <Location left="1260" top="518" />
+        <Size width="217" height="179" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public static BackupService obj { get; }</Member>
+        <Member type="Constructor">private BackupService()</Member>
+        <Member type="Constructor">static BackupService()</Member>
+        <Member type="Method">public IEnumerable&lt;Backup&gt; GetBackups()</Member>
+        <Member type="Method">public Void DoBackup(String username)</Member>
+        <Member type="Method">public Void DoRestore(Int32 backupId)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ChecksumService</Name>
+        <Access>Public</Access>
+        <Location left="991" top="518" />
+        <Size width="244" height="230" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">protected IEnumerable&lt;BaseRepository&gt; repositories</Member>
+        <Member type="Property">public static ChecksumService obj { get; }</Member>
+        <Member type="Constructor">private ChecksumService()</Member>
+        <Member type="Constructor">static ChecksumService()</Member>
+        <Member type="Method">public Void SetDatabaseToMaintenance()</Member>
+        <Member type="Method">public Void SetDatabaseToChecksumError()</Member>
+        <Member type="Method">public IEnumerable&lt;String&gt; CheckVerifiers()</Member>
+        <Member type="Method">public Void ResetHorizontalVerifiers()</Member>
+        <Member type="Method">public Void ResetVerticalVerifiers()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ComicalAPIService</Name>
+        <Access>Public</Access>
+        <Location left="788" top="338" />
+        <Size width="219" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public static ComicalAPIService obj { get; }</Member>
+        <Member type="Constructor">private ComicalAPIService()</Member>
+        <Member type="Constructor">static ComicalAPIService()</Member>
+        <Member type="Method">public Task&lt;Boolean&gt; RecalculateVerifiers()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>DatabaseStatusService</Name>
+        <Access>Public</Access>
+        <Location left="285" top="518" />
+        <Size width="255" height="230" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public static DatabaseStatusService obj { get; }</Member>
+        <Member type="Property">private DatabaseStatusRepository repository { get; }</Member>
+        <Member type="Constructor">private DatabaseStatusService()</Member>
+        <Member type="Constructor">static DatabaseStatusService()</Member>
+        <Member type="Method">public Void KillAllConnections()</Member>
+        <Member type="Method">public Void SetUnderMaintenance()</Member>
+        <Member type="Method">public Void UnsetUnderMaintenance()</Member>
+        <Member type="Method">public Void SetHasChecksumError()</Member>
+        <Member type="Method">public Void UnsetHasChecksumError()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>DependencyResolver</Name>
+        <Access>Public</Access>
+        <Location left="1128" top="12" />
+        <Size width="259" height="247" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private IUnityContainer container</Member>
+        <Member type="Field">private DependencyResolver instance</Member>
+        <Member type="Property">public static DependencyResolver obj { get; }</Member>
+        <Member type="Constructor">private DependencyResolver()</Member>
+        <Member type="Constructor">static DependencyResolver()</Member>
+        <Member type="Method">public Void SetContainer(IUnityContainer container)</Member>
+        <Member type="Method">public T Resolve()</Member>
+        <Member type="Method">public T Resolve(String key)</Member>
+        <Member type="Method">public Void Register()</Member>
+        <Member type="Method">public Void RegisterSingleton(Interface instance)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>LoggingService</Name>
+        <Access>Public</Access>
+        <Location left="1523" top="478" />
+        <Size width="318" height="247" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Lazy&lt;ISessionService&gt; lazySessionService</Member>
+        <Member type="Field">private LoggingService instance</Member>
+        <Member type="Property">public static LoggingService obj { get; }</Member>
+        <Member type="Property">private ISessionService SessionService { get; }</Member>
+        <Member type="Constructor">private LoggingService()</Member>
+        <Member type="Constructor">static LoggingService()</Member>
+        <Member type="Method">public Void Log(String section, String message, Int32? userId)</Member>
+        <Member type="Method">public IEnumerable&lt;HistoryEvent&gt; GetEvents()</Member>
+        <Member type="Method">public IEnumerable&lt;HistoryException&gt; GetExceptions()</Member>
+        <Member type="Method">public Void Log(String section, Exception ex, Int32? userId)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>PasswordHasher</Name>
+        <Access>Public</Access>
+        <Location left="873" top="12" />
+        <Size width="182" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public static PasswordHasher obj { get; }</Member>
+        <Member type="Constructor">private PasswordHasher()</Member>
+        <Member type="Constructor">static PasswordHasher()</Member>
+        <Member type="Method">public String Hash(String password)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>SecurityModelsService</Name>
+        <Access>Public</Access>
+        <Location left="582" top="518" />
+        <Size width="379" height="264" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public static SecurityModelsService obj { get; }</Member>
+        <Member type="Property">private PermissionRepository Permissions { get; }</Member>
+        <Member type="Property">private RoleRepository Roles { get; }</Member>
+        <Member type="Constructor">private SecurityModelsService()</Member>
+        <Member type="Constructor">static SecurityModelsService()</Member>
+        <Member type="Method">public IEnumerable&lt;Permission&gt; GetPermissions()</Member>
+        <Member type="Method">public RoleWithPermissionsViewModel GetRoleWithPermissions(Int32 roleId)</Member>
+        <Member type="Method">public IEnumerable&lt;Role&gt; GetRoles()</Member>
+        <Member type="Method">public Void CreateRole(RoleWithPermissionsViewModel role)</Member>
+        <Member type="Method">public Void UpdateRole(RoleWithPermissionsViewModel role)</Member>
+        <Member type="Method">public Void DeleteRole(Int32 id)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>SessionService</Name>
+        <Access>Public</Access>
+        <Location left="245" top="286" />
+        <Size width="264" height="162" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public Int32 CurrentUserId { get; set; }</Member>
+        <Member type="Property">public String CurrentUserName { get; set; }</Member>
+        <Member type="Property">public Boolean IsAuthenticated { get; }</Member>
+        <Member type="Property">public IEnumerable&lt;String&gt; Permissions { get; set; }</Member>
+        <Member type="Constructor">public SessionService()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>AuthenticateResponse</Name>
+        <Access>Public</Access>
+        <Location left="1485" top="12" />
+        <Size width="333" height="196" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public String ValidationError { get; set; }</Member>
+        <Member type="Property">public Boolean Authenticated { get; set; }</Member>
+        <Member type="Property">public Int32 UserId { get; set; }</Member>
+        <Member type="Property">public IEnumerable&lt;String&gt; ChecksumErrors { get; set; }</Member>
+        <Member type="Constructor">public AuthenticateResponse()</Member>
+        <Member type="Method">public static implicit operator AuthenticateResponse(String validationError)</Member>
+        <Member type="Method">public static implicit operator AuthenticateResponse(Int32 userId)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+    </Entities>
+    <Relationships>
+      <Relationship type="Nesting" first="1" second="12">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="11" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Association" first="7" second="7">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+        <StartRole>instance</StartRole>
+        <EndMultiplicity>1</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="8" second="8">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+        <StartRole>instance</StartRole>
+        <EndMultiplicity>1</EndMultiplicity>
+      </Relationship>
+    </Relationships>
+  </ProjectItem>
+</Project>

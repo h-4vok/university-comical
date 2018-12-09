@@ -1,6 +1,6 @@
 ﻿CREATE PROCEDURE Security_setVerifier
 	@table NVARCHAR(255),
-	@verifier NVARCHAR(500),
+	@verifier NVARCHAR(MAX),
 	@where NVARCHAR(MAX)
 AS
 BEGIN

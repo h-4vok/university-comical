@@ -1,0 +1,69 @@
+title Autenticación de Usuario
+
+Usuario->Login.aspx:loginInput.Value
+
+Usuario->Login.aspx:passwordInput.Value
+
+Usuario->Login.aspx:LoginButton.Click()
+
+Login.aspx->Login.aspx.cs:LoginButton_Click(sender, e)
+
+Login.aspx.cs->Login.aspx.cs:login=loginInput.Value
+
+Login.aspx.cs->Login.aspx.cs:password=passwordInput.Value
+
+Login.aspx.cs->AuthenticationService:Authenticate(login, password)
+
+AuthenticationService->AuthenticationService:ValidateInput(login, password)
+
+AuthenticationService<-AuthenticationService:String.IsNullOrWhiteSpace(login) == false
+
+AuthenticationService<-AuthenticationService:String.IsNullOrWhiteSpace(password) == false
+
+AuthenticationService->AuthenticationService:String.IsNullOrWhiteSpace(inputsAreValid) == true
+
+AuthenticationService->UserRepository:GetByLogin(login)
+
+AuthenticationService<--UserRepository:User
+
+AuthenticationService<--User:Blocked == false
+
+AuthenticationService<--User:Enabled == true
+
+AuthenticationService<--AuthenticationService:CheckPassword(password, user.Password) == true
+
+AuthenticationService->PasswordHasher:actualHashed = Hash(password)
+
+AuthenticationService<--AuthenticationService:String.Equals(actualHashed, expectedHashed) == true
+
+AuthenticationService<--AuthorizationService:IsEnabledFor(user.Id, PermissionCodes.VerifierDigits_CheckOnLogin) == false
+
+AuthenticationService->PermissionRepository:IsGrantedTo(userId, permissionCode) == true
+
+AuthenticationService<-AuthenticationService:databaseStatus = GetDatabaseStatus()
+
+AuthenticationService<-DatabaseStatusRepository:databaseStatus = Get()
+
+AuthenticationService<-AuthenticationService:databaseStatus.UnderMaintenance == false
+
+AuthenticationService<-AuthenticationService:databaseStatus.HasChecksumError == false
+
+AuthenticationService->LoggingService:Log("Autenticación", "Autenticación - usuario")
+
+Login.aspx.cs<--AuthenticationService:AuthenticationResponse
+
+Login.aspx.cs<--AuthenticationResponse:ChecksumErrors.Any() == false
+
+Login.aspx.cs<--AuthenticationResponse:Authenticated == true
+
+Login.aspx.cs->Login.aspx.cs:lblError.Visible = false
+
+Login.aspx.cs->Login.aspx.cs:Session.Add("UserId", authenticateResponse.UserId)
+
+Login.aspx.cs->Login.aspx.cs:Session.Add("UserName", login)
+
+Login.aspx.cs->Login.aspx.cs:Response.Redirect("Default.aspx")
+
+
+
+
